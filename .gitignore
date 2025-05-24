@@ -1,0 +1,34 @@
+# Local .terraform directories
+**/.terraform/*
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+
+# Exclude override files as they are usually local-specific
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore plan output files
+*.tfplan
+
+# Sensitive variable files (optional, if you use these)
+*.tfvars
+*.tfvars.json
+
+# .terraform.lock.hcl can be committed if using Terraform >= 0.14+
+# But you can ignore it if you prefer to regenerate it per environment
+# Uncomment the next line if you want to ignore it:
+# .terraform.lock.hcl
+
+# Ignore Terraform provider logs
+.terraform-provider-log*
+
+# Ignore local environment files (if used)
+.env
+.env.*
