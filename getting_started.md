@@ -43,19 +43,5 @@ aws sts get-caller-identity
 }
 ```
 
-## Run bootstrap
-```powershell
-cd .\bootstrap\
-terraform init
-terraform plan
-terraform apply
-```
 
-## Cleanup
-```powershell
-cd .\bootstrap\
-terraform init
-terraform plan
-terraform destroy
-```
 
