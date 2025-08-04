@@ -15,6 +15,8 @@
 - [Route53](/8_route_53.md)
 - [Elastic Beanstalk](./9_elastic_beanstalk.md)
 - [S3 - Simple Storage Service](./10_s3.md)
+- [Cloudfront](./11_cloudfront.md)
+- [Storage Extras](./12_storage_extras.md)
 
 
 
