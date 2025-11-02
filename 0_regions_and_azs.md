@@ -1,4 +1,10 @@
-# AWS Regions
+# AWS Regions and Availability Zones
+
+## Concepts
+* A `Region` is a separate geographic area.
+* `Availability Zone` (AZs) are isolated locations within each Region.
+* `Local Zones` provide you the ability to place resources, such as compute and storage, in multiple locations closer to your end users.
+* `Wavelength Zones` allow developers to build applications that deliver ultra-low latencies to 5G devices and end users. Wavelength deploys standard AWS compute and storage services to the edge of telecommunication carriers' 5G networks.
 
 ## Regions
 cluster of data-centers
@@ -9,16 +15,12 @@ How to chose a region?
 * Pricing: varies from region-to-region
 
 ## Availability Zones
-* each AZ is one or more discrete datacentgers with redunant power, netwroking connectivty
-* seprate from each so that they are isolated from disasters
-* Azs are connected with high bandwitch, ultra low latencynetworks
-* many (usually 3-6) for every region
-* eg: ap-southeast-2 -> ap-southesat-2a/b/c
+Each `region` has at least 3 `AZs`.
+
+An `AZ` has one or more discrete datacentgers with redunant power, networking connectivty separated from each other so that they are isolated from disasters.
+
+AZs are connected with high bandwitch, ultra low latencynetworks.
 
 ## PoP
-* 400+ rEdge locations and 10+ regional caches
-* Edge-focused: closer to users, typically in ISPs' data centers.
-* usually used to serve global services with low latency
-* Global services
-    IAM, ROute53, CloudFront, WAF
+AWS operates a global network of Points of Presence (PoPs) to provide fast, reliable, and secure access to AWS services like CloudFront. S3, Route53, IAM, WAF etc.
 

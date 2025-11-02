@@ -127,50 +127,5 @@ X509 and PKI?
 
 
 
-## Auto-Scaling Groups (ASG)
-Scale out/in to match increased/decreased load
-* ensure we have a min and max number of EC2 instances running
-* automatically register new instances to a load-balancer
-* re-create EC2 instances that are terminated.
-* free (only pay for the underlying EC2 instances)
-* Attributes
-    * A Launch Template:
-        - AMI + Instance Type
-        - EC2 User Data
-        - EBS Volume
-        - Security Groups
-        - SSH Key Pair
-        - IAM Roles for EC2 instances
-        - Network + Subnet Information
-        - Load Balancer Information
-    * Min/Max/Initial Capacity
-* Autoscaling
-    * can be integrated with CloudWatch alarms
-    * An alarm monitors a metric such as Avg CPU or a custom metric
-    * Metrics such as Average CPU are computed for the overall ASG instances
-* Scaling Policies
-    * Dynamic
-        * Target tracking scaling
-            * set a target like ASG CPU should stay at around 40%
-        * Simple/Step Scaling
-            * When a cloudwatch alarm is triggered (eg: CPU > 70%), then add 2 units
-            * When a cloudwatch alarm is triggered (eg: CPU < 30%), then remove 1
-    * Scheduled Scaling
-        * anticipate based on known usage patterns.
-        * eg: increase the min capacity to 10 at 5PM on Fridays
-    * Predictive Scaling
-        * continuously forecast load using historical load trends
-        * scale ahead of time 
-* Good metrics to scale on
-    - Average CpuUtilization across instances
-    - Average RequestCountPerTarget 
-    - Average Network bytes In/Out 
-    - Any custom metric
-
-* Scaling Cooldown
-    - after a scaling activity, the ASG waits a cooldown period
-    - default is 300 seconds
-    - during ASG will not scale-out/in
-    - to allow for metrics to stabilize
 
 

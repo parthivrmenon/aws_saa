@@ -46,12 +46,11 @@ Aurora Cross Region Read Replicas
 - useful for disaster recovery
 - simple setup
 
-Aurora GLobal Database (recommended)
-- 1 primary region (RW)
-- upto 5 secondary regions (RO), replication lag less thatn 1 second
-- upto 16 read replicas per secondary region
-- helps to decrease latency
-- promoting another region as priamry has RTO of < 1 minute
+## Aurora Global Database (recommended)
+With the Amazon Aurora Global Database feature, you set up multiple Aurora DB clusters that span multiple AWS Regions.
+It supports having one primary DB cluster in one Region, and up to 10 secondary DB clusters in different Regions.
+Aurora Global Database provides fast recovery from the rare outage that might affect an entire AWS Region. Having a full copy of all your data in multiple geographic locations also enables low-latency read operations for applications that connect from widely separated locations around the world.
+
 
 Aurora Machine Learning
 - add ML-based predictions to your apps via SQL (no ML experience required)

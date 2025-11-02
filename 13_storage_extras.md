@@ -1,13 +1,14 @@
 # Storage Extras
 ## AWS Snowball
-Highly secure, portable devices to collect and process data at the edge, and migrate data into and out of AWS (upto PBs)
+Highly secure, portable devices to collect and process data at the edge, and migrate data into and out of AWS 
+- can deal with Petabytes of data
 - Storage Optimized
 - Edge Compute Optimized
 
 Note: Snowball cannot import to Glacier directly. You must use Amazon S3 first, in combination with an S3 lifecycle policy.
 
 ## Amazon FSx
-Fully-managed high-performance filesystems on AWS backed up by 3rd party filesystems
+Launch 3rd party high-performance filesystems on AWS
 
 ### Deployment Options
 - Scratch File System
@@ -64,12 +65,21 @@ Fully-managed high-performance filesystems on AWS backed up by 3rd party filesys
 - point-in-time instantaneous cloning (helpful for testing new workloads)
 
 ## AWS Storage Gateway
-Bridge between on-premises data and cloud data
-Use cases:
-    - Disaster recovery
-    - backup and restore
-    - tiered storage
-    - on-premises cache & low latency files access
+AWS Storage Gateway is a hybrid cloud storage service that connects on-premises environments with Amazon Web Services (AWS) cloud storage. It provides low-latency access to frequently used data by caching it locally while securely and durably storing the data in the AWS cloud. This allows on-premises applications to access cloud storage using standard protocols like iSCSI, NFS, and SMB without needing to rewrite applications.  
+### Key Features
+- Hybrid access: It acts as a bridge between your local data center and AWS cloud storage. 
+- Standard protocols: Uses common storage protocols (iSCSI, NFS, SMB) to connect to your existing applications and Windows workloads seamlessly. 
+- Local caching: Caches frequently accessed data on-premises for low-latency performance for your applications. 
+- Efficient data transfer: Optimizes data transfers by only sending changed data and compressing data. 
+- Security and compliance: Helps meet security and compliance needs through features like encryption and audit logging. 
+- Deployment: Can be deployed as a virtual machine (VM) in a virtualized environment or as a dedicated hardware appliance. 
+### Types of gateways
+There are four main types of gateways, each addressing a different use case: 
+- File Gateway: Provides file-based access to cloud storage via SMB and NFS protocols, suitable for applications requiring a file interface, such as some Microsoft SharePoint or SQL Server deployments. 
+- Volume Gateway: Provides block storage (iSCSI) volumes that can be used for applications like databases that require block storage interfaces. 
+- Tape Gateway: Offers a virtual tape library (VTL) for backup and archiving workloads, allowing you to replace physical tape with cloud storage for cost savings and durability. 
+- FSx File Gateway: Provides access to in-cloud Amazon FSx for Windows File Server shares from on-premises locations. 
+
 ### S3 File Gateway
 ON-Prem apps can access S3 buckets (via NFS/SMB) through an `S3 File Gateway`
 - Gateway caches most recently used data

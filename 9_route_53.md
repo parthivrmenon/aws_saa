@@ -1,7 +1,7 @@
 # Route 53
 a highly available, scalable. fully-managed DNS service
 that you can use to manage your domains. (ie. Authoritative DNS server)
-- it is also a Domain Regustrar
+- it is also a Domain Registrar
 - ability to check the health of your resources
 - 100% availability SLA
 - "Route 53" is a reference to traditional DNS port

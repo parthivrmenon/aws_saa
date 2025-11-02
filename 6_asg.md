@@ -1,0 +1,132 @@
+# Auto-Scaling Groups (ASG)
+An Auto Scaling group is a logical grouping of EC2 instances that allows you to use Auto-scaling features on them such as 
+* health check replacements
+* scaling policies
+
+When an ASG is created, it starts by launching enough EC2 instances to meet the desired capacity and then maintains that number of instances by doing periodic health checks on the instances in the group and replacing any that are not healthy.
+
+The size of an Auto Scaling group depends on the number of instances that you set as the desired capacity. You can adjust its size to meet demand, either manually or by using automatic scaling.
+
+When instances are launched, if you specified multiple Availability Zones, the desired capacity is distributed across these Availability Zones. If a scaling action occurs, Amazon EC2 Auto Scaling automatically maintains balance across all of the Availability Zones that you specify.
+
+An ASG can contain On-Demand, Spot or a mix of both.
+
+## Health Checks
+All instances in an ASG start with a health check status of "Healthy". An ASG can receive notifications that an instance is unhealthy from various sources:
+* from Amazon EC2
+* ELB
+* VPC Lattice
+* Amazon EBS
+* Custom Health checks defined by user
+
+## Scaling
+### Maintain a fixed number of EC2 instances (default)
+The default for an Auto Scaling group is to not have any attached scaling policies or scheduled actions, which causes it to maintain a fixed size.
+
+### Scale manually
+You can manually adjust the number of EC2 instances in your Auto Scaling group at any time. Manual scaling is an alternative to auto scaling, especially if you want to make one-time capacity changes.
+
+### Scale based on a schedule
+With scheduled scaling, you can set up automatic scaling for your application based on predictable load changes. You create scheduled actions that increase or decrease your group's desired capacity at specific times.
+Example:
+- On Wednesday morning, one scheduled action increases capacity by increasing the previously set desired capacity of the Auto Scaling group.
+
+- On Friday evening, another scheduled action decreases capacity by decreasing the previously set desired capacity of the Auto Scaling group.
+
+You can use scheduled scaling and scaling policies together to get the benefits of both approaches to scaling. After a scheduled scaling action runs, the scaling policy can continue to make decisions. Current capacity must fall within the minimum and maximum capacity that was set by your scheduled action.
+
+### Scale dynamically based on demand
+Amazon EC2 Auto Scaling supports the following types of dynamic scaling policies:
+
+#### Target tracking scaling
+Increase and decrease the current capacity of the group based on a Amazon CloudWatch metric and a target value. It works similar to the way that your thermostat maintains the temperature of your home—you select a temperature and the thermostat does the rest.
+
+**Example:**
+Maintain an average CPU usage of 50%
+
+#### Step scaling
+Increase and decrease the current capacity of the group based on a set of scaling adjustments, known as step adjustments, that vary based on the size of the alarm breach.
+
+**Example:**
+- If the average CPU usage of your Auto Scaling group exceeds 70%, add 2 EC2 instances to the group.
+- If the average CPU usage of your Auto Scaling group exceeds 80%, add 4 EC2 instances to the group.
+
+#### Simple scaling
+Increase and decrease the current capacity of the group based on a `single` scaling adjustment, with a `cooldown period` between each scaling activity.
+
+**Example:**
+- If the average CPU usage of your Auto Scaling group exceeds 70%, add 2 EC2 instances to the group.
+
+
+
+### Scale proactively
+Predictive scaling works by analyzing historical load data to detect daily or weekly patterns in traffic flows
+Predictive scaling is well suited for situations where you have:
+
+Cyclical traffic, such as high use of resources during regular business hours and low use of resources during evenings and weekends
+
+Recurring on-and-off workload patterns, such as batch processing, testing, or periodic data analysis
+
+Applications that take a long time to initialize, causing a noticeable latency impact on application performance during scale-out events
+
+
+## Rebalancing activities
+### Availability Zone Rebalancing
+Your ASG can become unbalanced between Availability Zones when:
+- You change the AZ association of your ASG
+- You explicitly terminate or detach or place instances in standby
+- An Availability Zone that previously had insufficient capacity recovers and now has additional capacity.
+- An Availability Zone that previously had a Spot price above your maximum price now has a Spot price below your maximum price.
+
+When rebalancing, Amazon EC2 Auto Scaling launches new instances before terminating the earlier ones. This way, rebalancing does not compromise the performance or availability of your application.
+
+### Capacity Rebalancing
+You can turn on Capacity Rebalancing for your Auto Scaling groups when using Spot Instances. This lets Amazon EC2 Auto Scaling attempt to launch a Spot Instance whenever Amazon EC2 reports that a Spot Instance is at an elevated risk of interruption. After launching a new instance, it then terminates an earlier instance
+
+
+
+### Others [not refined]
+Scale out/in to match increased/decreased load
+* ensure we have a min and max number of EC2 instances running
+* automatically register new instances to a load-balancer
+* re-create EC2 instances that are terminated.
+* free (only pay for the underlying EC2 instances)
+* Attributes
+    * A Launch Template:
+        - AMI + Instance Type
+        - EC2 User Data
+        - EBS Volume
+        - Security Groups
+        - SSH Key Pair
+        - IAM Roles for EC2 instances
+        - Network + Subnet Information
+        - Load Balancer Information
+    * Min/Max/Initial Capacity
+* Autoscaling
+    * can be integrated with CloudWatch alarms
+    * An alarm monitors a metric such as Avg CPU or a custom metric
+    * Metrics such as Average CPU are computed for the overall ASG instances
+* Scaling Policies
+    * Dynamic
+        * Target tracking scaling
+            * set a target like ASG CPU should stay at around 40%
+        * Simple/Step Scaling
+            * When a cloudwatch alarm is triggered (eg: CPU > 70%), then add 2 units
+            * When a cloudwatch alarm is triggered (eg: CPU < 30%), then remove 1
+    * Scheduled Scaling
+        * anticipate based on known usage patterns.
+        * eg: increase the min capacity to 10 at 5PM on Fridays
+    * Predictive Scaling
+        * continuously forecast load using historical load trends
+        * scale ahead of time 
+* Good metrics to scale on
+    - Average CpuUtilization across instances
+    - Average RequestCountPerTarget 
+    - Average Network bytes In/Out 
+    - Any custom metric
+
+* Scaling Cooldown
+    - after a scaling activity, the ASG waits a cooldown period
+    - default is 300 seconds
+    - during ASG will not scale-out/in
+    - to allow for metrics to stabilize
