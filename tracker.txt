@@ -1,32 +1,57 @@
-Topics to study/add:
-- Athena, AWS Glue DataBrew, AppFlow
-- DynamoDB
-- GuardDuty
-- Inspector
-- AWS Glue
-29/10/2025:
-- Lecture: IAM
-- Practice Questions 10
-Revise: NFS, AWS Storage Gateway, interface VPC endpoint, Direct Connect, VPC Peering and Transit Gateway, Amazong Fsx for Lustre,
-AWS Glue*, EC2 Auto-scaling groups, Dynamo DB, Elasticache, AWS DMS, AWS RDS,S3
+Start: 29th October 2025
 
-30/10/2025:
-- Practice Questions - 11-25
-- to Revise: ASG Scaling Policies, AWS S3TA, Cloudfront and Global Accelerator
-- to Learn: Transcribe, Comprehend, Lookout for Vision, Route 53 Resolver inbound/outbound endpoint, AWS Redshift, AWS Directory Service AD Connector, S3 Retention Period
+29th October 2025:
+- Stephane Maraek Lecture: IAM 
+- Practice: Practice Exam #1  Q01 - Q10
+- Gaps/To Revise:
+    - NFS, 
+    - AWS Storage Gateway, 
+    - interface VPC endpoint
+    - Direct Connect
+    - VPC Peering and Transit Gateway
+    - Amazong Fsx for Lustre,
+    - AWS Glue*, 
+    - EC2 Auto-scaling groups
+    - Dynamo DB
+    - Elasticache
+    - AWS DMS
+    - AWS RDS
+    - S3
 
 
-01/11/2025:
-- Lecture: Route53
+30th October 2025:
+- Practice: Practice Exam #1  Q11 - Q25
+- Gaps/To Revise: 
+    - ASG Scaling Policies
+    - AWS S3TA
+    - Cloudfront and Global Accelerator
+    - Transcribe, 
+    - Comprehend
+    - Lookout for Vision
+    - Route 53 Resolver inbound/outbound endpoint
+    - AWS Redshift
+    - AWS Directory Service AD Connector
+    - S3 Retention Period
 
-To Revise:
-- Amazon RDS Custom
-- AWS Lambda Limits
-- Amazon EBS Volume Types
-- VPC Peering 
-- Amazong Kinesis and Dynamo DB
-- IRSA
-- EventBridge, SQS delivery semantics
-- S3 One Zone IA, S3 concurrency limits
-- DirectConnect
-- FIFO Queues
+01st Novemeber, 2025
+- Stephane Maraek Lecture: Route53
+- Gaps/Revise:
+    - Amazon RDS Custom
+    - AWS Lambda Limits
+    - Amazon EBS Volume Types
+    - VPC Peering 
+    - Amazong Kinesis and Dynamo DB
+    - IRSA
+    - EventBridge, SQS delivery semantics
+    - S3 One Zone IA, S3 concurrency limits
+    - DirectConnect
+    - FIFO Queues
+    - CloudTrail
+
+
+02nd November, 2025:
+- Practice: Practice Exam #1: Practice Mode -> scored 55% (36/65) in 2 hours, 10 minutes 
+
+03rd November, 2025:
+- AWS Docs: DynamoDB 
+- 
