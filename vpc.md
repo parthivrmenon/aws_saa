@@ -78,5 +78,16 @@ Interface, Resource, Service network, and Gateway Load Balancer endpoints are po
 Gateway endpoints provide reliable connectivity to Amazon S3 and DynamoDB without requiring an internet gateway or a NAT device for your VPC. Gateway endpoints do not use AWS PrivateLink.
 
 
+## VPC Peering
+VPC Peering allows you to `route traffic between two VPCs` in the same account of different accounts.
+
+### Pricing for a peering connection
+All data transfers between VPCs are `free` as long as the data is transferred within the same Availability Zone.(even if the VPCs are in different accounts)
+
+### VPC Peering Limitations
+- A VPC Peering connection is between two VPCs. A VPC can have multiple peering connections but they are `not transitive` in nature.
+
+
+
 
 

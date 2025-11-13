@@ -10,7 +10,6 @@ Start: 29th October 2025
     - Direct Connect
     - VPC Peering and Transit Gateway
     - Amazong Fsx for Lustre,
-    - AWS Glue*, 
     - EC2 Auto-scaling groups
     - Dynamo DB
     - Elasticache
@@ -54,4 +53,32 @@ Start: 29th October 2025
 
 03rd November, 2025:
 - AWS Docs: DynamoDB 
-- 
+
+
+05th November, 2025:
+Make notes for:
+- https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html
+- https://aws.amazon.com/documentation-overview/aurora/
+- https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html
+- https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html
+
+
+Practice Test #1: Review 
+Q2: AWS Private Link (VPC Endpoints)
+Q5: AWS Glue
+Q9: Aurora; Babelfish, SCT, DMS
+Q10: S3 Storage Classes
+
+
+RDS:
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/database-authentication.html
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Concepts.General.SSL.Using.html
+
+
+EC2:
+ASG 
+IPV6 Egress only IGW : https://docs.aws.amazon.com/vpc/latest/userguide/egress-only-internet-gateway.html
+Capacity Reservations: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring_ec2.html

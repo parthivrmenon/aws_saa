@@ -1,6 +1,8 @@
 # Amazon EC2
 
-Elastic Cloud Compute
+Elastic Cloud Compute let's you launch a Linux/Win/Mac based virtual machine. 
+
+
 
 Capabilities
 * Rentint Vms
@@ -24,15 +26,16 @@ Capabilities
     * install updates/softwares
     * runs with root user (sudo)
 
-## Instance Type
+# EC2 -  Instance Type
 * Instance Names -> m5.2xlarge
     * m: instance class
     * 5: generation
     * 2xlarge: size within instance class
-* General Purpose
-* Compute Optimized
-* Memory Optimized
-* Storage Optimized
+* General Purpose (t' and m')
+* Compute Optimized (c')
+* Memory Optimized (r')
+* Storage Optimized (d')
+* Accelerated Computing (p-type and g-type)
 
 ## Security Groups
 * controls how traffic is allowed in or out of EC2 instances
@@ -50,56 +53,90 @@ Capabilities
 * 22 = SFTP (Secure FTP)
 * 80,443 = HTTP/HTTPs
 
-## Purchase options
-* On-Demand
-    * Linux/Win : billed per second (after 1st minute)
-    * Others: billed per hour
-    * highest cost but no upfront payment
-    * short un-interrupted workloads where app behavior cannot be predicted
-* Reserved (1-3 years)
-    * discounted price
-    * Reserve an instance typoe, region, tenancy, OS
-    * Reservation period 1 year or 3 years
-    * No upfront, Partial, Full
-    * for steady apps (eg:database)
-    * buy/sell Reserved Instance Marketplace
-    * long workloads
-* Convertibale Reserved
-    * change type, instance family, OS, scope etc
-    * less discount than Reserved
-    * long worklaods with flexible instances
-* Savings Plan (1 & 3 years)
-    * discounted price (same as RI)
-    * commit to certain type of usage ($10/hr for 1 or 3 years)
-    * Usage beyond the plan is billed at On-Demand price
-    * locked to a specific isntance family, (eg: M5 in us-east-1)
-    * flexible across
-        * instance size
-        * OS
-        * Tenancy
-* Spot Instances 
-    * upto 90% discount
-    * MOST cost-efficient
-    * can lose any point of time if max price is less than current cost price
-    * well-suted for fault-tolerant (batch jobs, data analysis)
-* Dedicated hosts
-    * book a whole physical server
-    * compliance requirements and use your existing server bound licenses (BYOL)
-    * Options
-        * On-Demand
-        * Reserved
+# EC2 -  Purchase Options
+### On-Demand instances
+Pay for what you use. 
+
+For `Linux/Windows` instances you are `billed per second`, after the first minute.
+For other OS's you are `billed per hour`.
+
+* has the `highest cost` but `no upfront payment` or `long-term commitment`
+
+* Recommended for `short un-interrupted workloads where app behavior cannot be predicted`
+
+* has a `vCPU limit per region per instance type` which can be increased by submitting a request.
+
+### Reserved Instances
+You can `reserve` a specific instance type, region, tenancy, OS allowing you to get upto `72% discounts`.
+
+The reservation period is `1 to 3 years`.
+
+You can purchase Reserved Instances in the following ways : `No Upfront`, `Partial Upfront`, `All Upfront`.
+
+Discount increases with increased commitment.
+
+Recommended for `steady-state long running usage patterns` like a database.
+
+You can `buy/sell Reserved Instance Marketplace`.
+
+You are limited to `20 Reserved Instances per region`.
+
+#### Convertible Reserved Instances
+can `change type, instance family, OS, scope etc` but you get `less discount than Reserved`.
+
+### Savings Plan
+same discount as Reserved Instance but instead of reserving an instance, you `commit to certain type usage pattern`
+
+Example: `commit to $10/hr for 1 or 3 years`.
+
+Usage beyond the plan is billed at On-Demand price.
+
+You are locked to a specific `instance family`, but you can change the size, OS and tenancy.
+
+### Spot Instances 
+You can `bid for unused capacity`.
+
+You can get `up to 90% discount` on On-Demand price. These are the most cost-efficient.
+
+You can lose any point of time if max price is less than current cost price
+
+Recommended for `fault-tolerant (batch jobs, data analysis)`
+
+Limit: dynamic spot limit per region.
+
+### Dedicated Hosts
+You can `book a whole physical server`.
+Recommended when you have `compliance requirements and use your existing server bound licenses (BYOL)`
+You have two Options:
+    * On-Demand
+    * Reserved
     * The most expensive
-* Dedicated Instance
-    * run on hardware dedicated to you
+
+### Dedicated Instances
+You can `run on hardware dedicated to you`.
     * share hardware within same account
     * no control on hardware
     * no other customers will share your hardware
-* Capacity Reservations
-    * reserve capacity in a specific AZ for any duration
-    * no time commitment , no billing discounts
-    * combine with Regional Reserved Insances and Savings plan
-    * charged at On-Demand whether you run or onot
-    * Short workloads, within same AZ.
+
+### Capacity Reservations
+You can `reserve capacity in a specific AZ for any duration`.There is `no time commitment` , `no billing discounts`
+
+You can `combine with Regional Reserved Insances and Savings plan`
+
+You are `charged at On-Demand whether you run or not`
+
+Recommended for `mission-critical workloads with short-term usage`
+
+# CloudWatch Metrics for EC2
+### AWS provided metrics
+by default, AWS provides CPU, Network, Disk and Status Check metrics for your instances.
+
+Basic Monitoring (default) collects these metrics at 5 min interval.
+You can enable Detailed Monitoring to collect metrics at 1 min interval but this is a paid feature.
+
+### Custom metrics
+If you want additional metrics like Memory Utilization, you can use CloudWatch Agent to collect and send custom metrics to CloudWatch.
+You can have Basic resolution (1min) or High resolution (upto 1 second).
 
 ## Spot Instances
 Define max spot price and get instance while current spot price < max
