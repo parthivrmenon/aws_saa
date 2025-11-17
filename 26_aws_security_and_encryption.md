@@ -2,10 +2,11 @@
 
 # AWS Key Management Service (KMS)
 - Fully managed Encryption Service 
-- integrates with IAM for Authorization
-- integrates with AWS CloudTrail for Auditing
-- integrates with other AWS Services lke EBS, S3, RDS, SSM, EKS etc
+- Integrates with IAM for Authorization/Access Control
+- Integrates with AWS CloudTrail for Auditing
+- Integrates with other AWS Services lke EBS, S3, RDS, SSM, EKS etc
 - KMS keys cannot be migrated across regions/accounts
+
 ## Key Types - General
 ### Symmetric Keys
 - a single key is used for both encryption and decryption
@@ -44,7 +45,7 @@
 ## KMS - Multi-Region Keys
 - a set of identical keys in different AWS regions that can be used interchangeably - ie. encrypt in one region and decrypt in another.
 - multi-region keys have the same ID, key material, key rotation policy.
-- once created, each Multi-Region keys is managed independently.
+- once created, each Multi-Region keys is managed independently.(eg: Key Policies need to be managed independently)
 
 Use Cases:
 - a 'global' client side encryption key 
@@ -63,12 +64,17 @@ Use Cases:
     - re-encrypted using destination KMS CMK by S3
     - even if you use Multi-Region keys, S3 will treat them as independent keys.
 
-# AMI Sharing across AWS Accounts - Encryption Considerations
-1. AMI in source account is encrypted with KMS Key in source account
-2. modify AMI to add Launch Permissions for the destination account
-3. Share the KMS key with the destination account
-4. destination account should have permissions to DescribeKey,ReEncrypt, CreateGrant, Decrypt
-4. When launching an EC2 instance with the AMI, the destination account has the option to re-encrypt the AMI using a different KMS key.
+# Sharing Encrypted AMIs across AWS Accounts
+1. AMI's snapshot is encryped with src_key.
+2. Modify AMI's permissions to grant target account to launch the AMI.
+3. Share the src_key with the target account by updating the key's policies.
+4. Target account's EC2 principal  should have permissions to:
+    - kms:decrypt - to decrypt snapshot
+    - kms:describeKey - to validate key
+    - kms:reEncrypt* - to re-encrypt snapshot with target key
+    - kms:createGrant - to allow EC2 to temporarily use the src_key during launch.
+5. When launching an EC2 instance with the AMI, the destination account has the option to re-encrypt the AMI using a different KMS key.(instead of using the src_key)
+
 ## KMS - EKS
 
 ## KMS - Lambda
@@ -99,7 +105,10 @@ Use Cases:
 - newer than SSM Parameter Store
 - force rotation of secrets every 'x' days
 - automate generation of secrets using Lambda
-- integrates with more services like Amazon RDS (MySQL, Postgres, Aurora) , DocumentDB, Redshift etc.
+- has native integration with services like:
+    * Amazon RDS (MySQL, Postgres, Aurora)
+    * DocumentDB
+    * Redshift
 - Secrets are encrypted using KMS
 ## AWS Secrets Manager - Multi-Region Secrets
 - replicates secrets across regions
@@ -119,12 +128,13 @@ Use Cases:
     * API Gateway
 - Note: You cannot use ACM with EC2 instances directly.
 
-## AWS ACM - Reuqestint a Public Certificate
+## AWS ACM - Requesting a Public Certificate
 - List domains (FQDN or wildcard) for which you want to request a certificate
-- Selectt validation method (DNS or Email)
-    - Email validation sends an email to the contacts listed in WHOIS
+- Select validation method (DNS or Email)
+    - Email validation sends an email to the contacts listed in WHOIS database.
     - DNS validation requires you to add a CNAME record to your domain
-- After a few hours certificate is issued and setup f or auto-renewal 60 days before expiry.
+- After a few hours certificate is issued 
+- Certificate is setup for auto-renewal 60 days before expiry.
 
 ## AWS ACM - Importing a Private Certificate
 - No auto-renewal
@@ -195,11 +205,11 @@ Use Cases:
 # Amazon GuardDuty
 - intelligent threat detection service
 - uses Machine Learning/Anomaly Detection to detect threats
-- input data:
-    - cloudtrail logs
-    - vpc flow logs
-    - dns logs
-    - optionally, EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events etc
+- Input data:
+    - CloudTrail Logs
+    - VPC Flow Logs
+    - DNS Logs
+    - Optionally, EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events etc
 - can setup EventBridge rules to forward findings to CloudWatch, Lambda etc
 - can protect against cryptocurrency attacks
 

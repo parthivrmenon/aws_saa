@@ -2,14 +2,14 @@
 
 # Amazon Athena
 
-Athena is a serverless interactive query service that allows you to query data in S3 using standard SQL (built on top of Presto)
+Athena is a serverless `interactive query service` that allows you to query data in S3 using standard SQL (built on top of Presto/Trino)
 
 You are charged $5 per TB of data scanned.
 
 Athena is commonly used with QuickSight for data analysis and visualization.
 
 ## Performance considerations
-* use Columnar data formats (Parquet, ORC) for better performance (You can use `Glue` to convert data to columnar format)
+* use Columnar data formats (Parquet, ORC) for better performance (You can use Glue to convert data to columnar format)
 * compress data to reduce storage and improve query performance (Gzip, Snappy)
 * partition datasets in S3 using key prefixes to reduce the amount of data scanned
 * use larger (>128MB) files to minimize overhead.
@@ -21,21 +21,17 @@ uses Data Source connectors that run on AWS Lambda to run federated queries on C
 
 
 # Amazon Redshift
-is an OLAP (Online Analytical Processing) Data Warehouse service based on PostgreSQL.
-
-Offers 10x better performance than other data warehouses and supports Petabytes of data.
-
-Stores data as columns and supports parallel queries.
-
-Supports two modes: 
-* Provisioned
-* Serverless
-
-Redshift has an SQL interface for performing queries but also supports direct integration with Amazon QuickSight.
+- OLAP (Online Analytical Processing) Data Warehouse service based on PostgreSQL.
+- Offers 10x better performance than other data warehouses and supports Petabytes of data.
+- Stores data as columns and supports parallel queries.
+- Supports two modes: 
+    * Provisioned
+    * Serverless
+- Redshift has its own SQL interface for performing queries but also supports direct integration with Amazon QuickSight.
 
 ### Redshift - Clustering
-- has a `leader` node for query planning and results aggregation
-- has `compute nodes` for data processing
+- has a leader node for query planning and results aggregation
+- has compute nodes for data processing
 
 ###  Redshift - Snapshots and DR
 - Redshift has multi-AZ for some clusters
@@ -44,13 +40,10 @@ Redshift has an SQL interface for performing queries but also supports direct in
 - You can restore a snapshot to a new cluster or to the same cluster. You can also restore a snapshot to a different region.
 
 ## Redshift - Data Ingestion
-using Amazon Kinesis Data Firehose, which loads data into an S3 bucket and then COPIES it into Redshift.
-
-manually load data into an S3 bucket and COPY it into Redshift
-
-You can enable `Enhanced VPC Routing`   to route data from S3 to Redshift over a private link.
-
-you can also use a JDBC driver to write data from an EC2 instance to Redshift. It's always better to write the data in batches.
+- manual: load data into an S3 bucket and COPY it into Redshift
+- Amazon Kinesis Data Firehose: loads data into an S3 bucket and then COPY it into Redshift.
+- Enhanced VPC Routing: route data from S3 to Redshift over a private link.
+- JDBC driver: write data from an EC2 instance to Redshift. It's always better to write the data in batches.
 
 ### Redshift Spectrum
 allows you to query data in S3 without first loading it.
@@ -96,7 +89,7 @@ is a serverless, machine-learning powered Business Intelligence service.
 You can create interactive dashboards that are fast, scalable and embeddable with per-session pricing.
 
 can integrate with:
-- many AWS data sources like RDS, Aurora, Aathena, Redshift, S3 etc
+- many AWS data sources like RDS, Aurora, Athena, Redshift, S3 etc
 - 3rd party data sources like Salesforce, JIRA etc.
 - 3rd party databases like teradata or onprem databases using JDBC.
 - import data in xlsx, csv, json, .tsv, elf, clf etc. (and use SPICE engine for in-memory computation)
@@ -116,19 +109,17 @@ is a managed ETL service used to prepare data for analytics, machine learning, a
 
 ### Use Cases
 * Load data from S3 or RDS into a Data Warehouse like Redshift.
-* Can take data in  CSV format in an S3 bucket and convert it into Parquet format and can then be analyzed by AWA Athena
+* Can take data in  CSV format in an S3 bucket and convert it into Parquet format and can then be analyzed by AWS Athena
 
 ## Glue Data Catalog
-`AWS Glue Data Crawler` can connect to various sources like S3, RDS, DynamoDB, JDBC, etc. and create a metadata catalog.
-Amazon
-It is used by Athena, Redshift Spectrum and Amazon EMR
+`Glue Crawler` can connect to various sources like S3, RDS, DynamoDB, JDBC, etc. and create a metadata catalog.
+It is used by Athena, Redshift Spectrum and EMR
 
 ## Other services
-`Glue Job Bookmark` to prevent re-processing of data
-`Glue DataBrew` to clean and normalize data using pre-built transformations
-`Glue Studio`: new GUI to create, run and monitor ETL Jobs in Glue
-`Glue Streaming ETL` (built on top of Apache Spark Structured Streaming) compatible with Kinesis Data Streaming, Kafka, MSK (managed Kafka)
-
+- `Glue Job Bookmark` to prevent re-processing of data
+- `Glue DataBrew` no-code data cleaning interface using pre-built transformations.
+- `Glue Studio`: new GUI to create, run and monitor ETL Jobs in Glue
+- `Glue Streaming ETL` (built on top of Apache Spark Structured Streaming) compatible with Kinesis Data Streaming, Kafka, MSK (managed Kafka)
 
 
 ## AWS Data Lake Formation

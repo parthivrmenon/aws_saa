@@ -1,5 +1,5 @@
 # Dynamo DB
-Amazon DynamoDB is a serverless, NoSQL, fully managed database with single-digit millisecond performance at any scale.
+Amazon DynamoDB is a `serverless`, NoSQL, `fully managed` `NoSQL database` with `single-digit millisecond performance at any scale.
 
 ## Features
 * `Serverless`: On-Demand instant scaling with pay-as-you-go pricing 
@@ -22,13 +22,15 @@ Global tables provide the following benefits:
 * enable higher application availability with `low or zero RPO` 
 
 ### Continuous backups and point-in-time recovery
-You can restore a table to any point in time during the last `35` days. 
-Continuous backups and initiating a point-in-time recovery has no impact on performance or availability of your applicatioons. They do not consume provisioned resources.
+- restore table to any point in time during the last `35` days. 
+- backups/recovery has no impact on performance or availability of your applicatioons. 
+- do not consume provisioned resources.
 
 ### On-Demand backup and restore
-You can create full backups of your tables for long term retention and compliance
-Backups do not impact performance and you can backup tables of any size.
-The Backups can be copied  across Accounts and Regions. Older backups can be transitioned to cold storege for cost-optimization.
+- create full backups of your tables for long term retention and compliance
+- backups do not impact performance and you can backup tables of any size.
+- backups can be copied  across Accounts and Regions. 
+- older backups can be transitioned to cold storage for cost-optimization.
 
 
 ## DynamoDB Trasactions
