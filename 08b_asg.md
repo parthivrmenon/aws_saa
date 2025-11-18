@@ -19,6 +19,14 @@ All instances in an ASG start with a health check status of "Healthy". An ASG ca
 * Amazon EBS
 * Custom Health checks defined by user
 
+### ASG: ASG may not mark an instance as unhealthy even if a Health Check fails..
+- `Health Check Grace Period` has not expired
+- `Suspended Processes` list contains HealthCheck, ReplaceUnhealthy, Launch or Terminate
+- Instance is in `impaired` status and is still recovering
+- Instance is in `not in InService` state.
+- Waiting for `ELB connection draining` to complete
+- If the failed Health Check is an `ELB Health Check` and Health Check Type is set to EC2 Health Check
+
 ## Scaling
 ### Maintain a fixed number of EC2 instances (default)
 The default for an Auto Scaling group is to not have any attached scaling policies or scheduled actions, which causes it to maintain a fixed size.
@@ -70,6 +78,41 @@ Recurring on-and-off workload patterns, such as batch processing, testing, or pe
 Applications that take a long time to initialize, causing a noticeable latency impact on application performance during scale-out events
 
 
+## Scaling activities
+### Scale-Out
+- Always launch new instances in AZs with the fewest instances. 
+- If there are multiple AZs with the same number of instances, it will try to break the tie using Allocation Strategy
+
+#### Allocation Strategies:
+- On-Demand Allocation Strategy: 
+    - `lowest-price` - select pools with highest cost efficiency
+    - `prioritized` - provided as a list by user in launch template overrides.
+
+- Spot Allocation Strategy
+    - `price-capacity-optimized` (recommended) - select pools which are least likely to be interrupted + has lowest price
+
+    - `capacity-optimized` - select pools with highest available capacity (least likely to be interrupted)
+    - lowest price - more prone to interruptions, but costs less.
+    - `capacity-optimized-prioritized` -  launch in pools with highest available capacity, but with priority list provided by user once a pool is chosen
+
+### Scale-In - Termination Policy:
+`Default` Termination Policy:
+1. Choose AZ with the most instances
+2. Within an AZ choose an instance based on (in order):
+    * outdated configuration (oldest launch template/launch configuration)
+    * closes to the next billing hour
+    * chose random
+
+Other Termination Policies:
+- OldestInstance
+- NewestInstance
+- OldestLaunchTemplate
+- OldestLaunchConfiguration
+- ClosestToNextInstanceHour
+- AllocationStrategy
+
+
+
 ## Rebalancing activities
 ### Availability Zone Rebalancing
 Your ASG can become unbalanced between Availability Zones when:
@@ -80,8 +123,9 @@ Your ASG can become unbalanced between Availability Zones when:
 
 When rebalancing, Amazon EC2 Auto Scaling launches new instances before terminating the earlier ones. This way, rebalancing does not compromise the performance or availability of your application.
 
-### Capacity Rebalancing
-You can turn on Capacity Rebalancing for your Auto Scaling groups when using Spot Instances. This lets Amazon EC2 Auto Scaling attempt to launch a Spot Instance whenever Amazon EC2 reports that a Spot Instance is at an elevated risk of interruption. After launching a new instance, it then terminates an earlier instance
+### Capacity Rebalancing (Spot Instances)
+- When using Spot Instances, you can turn on Capacity Rebalancing. 
+- This lets Amazon EC2 Auto Scaling attempt to launch a Spot Instance whenever Amazon EC2 reports that a Spot Instance is at an elevated risk of interruption. After launching a new instance, it then terminates an earlier instance
 
 
 

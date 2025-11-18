@@ -18,12 +18,17 @@
 - used for signing/verifying data
 - you can download the public key material
 
-## KMS -  Key Types
-- AWS Owned Keys - SSE-S3, SSE-SQS, SSE-DDB 
+## Key Types
+- AWS Owned Keys
+    * SSE-S3, SSE-SQS, SSE-DDB etc
+    * These are managed outside of KMS
+    * does not have rotation
+    * does not have Cloudtrail Audit
+
 - AWS Managed Keys (AMK)
     * format: aws/service
     * uses symmetric keys
-    * rotated automatically
+    * rotated automatically every 1 year
 - Customer Managed Keys (CMK)
     * two types: created, imported
     * both types cost $1/month + 0.03 per 1000 requests
@@ -203,7 +208,7 @@ Use Cases:
 -  if you are prone to DDoS attacks, use Shield Advanced which gives you access to Shield Response Team (DRP) and also manages the WAF rules for you.
 
 # Amazon GuardDuty
-- intelligent threat detection service
+- intelligent `threat detection` service
 - uses Machine Learning/Anomaly Detection to detect threats
 - Input data:
     - CloudTrail Logs
@@ -212,6 +217,27 @@ Use Cases:
     - Optionally, EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events etc
 - can setup EventBridge rules to forward findings to CloudWatch, Lambda etc
 - can protect against cryptocurrency attacks
+
+# Amazon Inspector
+- automated `security assessment` (vulnerabilities) service
+- EC2:
+    - uses AWS System Manager (ASM) agent
+    - detects unintended network access
+    - detects vulnerabilities in the OS
+- Container Images in ECR
+- Lambda Functions:
+    - software vulnerabilities in code and dependencies
+- reporting with AWS Security Hub
+- send findings/events to AWS EventBridge
+
+# Amazon Macie
+- fully managed data security and privacy service
+- used ML and pattern matching to detect sensitive data
+- helps identify and alert you to Personally Identifiable Information (PII) breaches
+- analyze data in S3
+- sends notifications to AWS EventBridge
+
+
 
 
 

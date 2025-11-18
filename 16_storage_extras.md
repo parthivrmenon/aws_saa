@@ -5,7 +5,7 @@ Highly secure, portable devices to collect and process data at the edge, and mig
 - Storage Optimized
 - Edge Compute Optimized
 
-Note: Snowball cannot import to Glacier directly. You must use Amazon S3 first, in combination with an S3 lifecycle policy.
+**Note:** Snowball cannot import to Glacier directly. You must use Amazon S3 first, in combination with an S3 lifecycle policy.
 
 ## Amazon FSx
 Launch 3rd party high-performance filesystems on AWS

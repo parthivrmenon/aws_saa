@@ -1,55 +1,75 @@
-# Simple Queuing Service
+# Simple Queuing Service (SQS)
 Fully-managed service, 
 used to decouple applications AND/OR
 used to act as buffer between Apps and Database
 
+## Standard Queue
 
-## Standard Queues
-### Features
-- unilimited throughput, unlimited messages (inifinitely scalable)
-- retention 4-14 days
-- low latency (<10ms) on send/receive
-- max 256 KB per message
+### General Features
+* Unlimited throughput
+* Unlimited capacity
+* Retention: 4 days by default; upto 14 days
+* Latency: <10ms for both send/receive
+* Message Size: 256 KB/message
+
+### Producers & Consumers
+- Producers send messages via SDK's SendMessage API
+- Consumers poll for messages from the queue
+- Consumers can fetch upto 10 messages at a time
+- messages are persisted in the queue until consumers delete it via DeleteMessage API or retention period has expired.
+
 - at least once delivery
 - best effort ordering
 - consumer: 10 messages at a time
 - consumer: use ASG for scaling (using Queue length)
 
-## Consumers: Horizontal Scaling
-- Consumers 'poll' for messages 
-- Setup an ASG + Cloudwatch Alarm on Cloudwatch Metric 'ApproximateNumberOfMessages' ( Queue length)
-- whenever there is a breach, more consumers are added
+
+## Consumers: Automatic Horizontal Scaling with Queue Length
+- Add Consumers to an ASG
+- Configure a CloudWatch alarm on `ApproximateNumberOfMessagesVisible` (or other queue metrics)
+- Configure alarm to trigger ASG scaling policy (simple, step or target)
 
 ## Security
-- Encryption:
-    - In-flight encryption using HTTPS API
-    - At-rest encryption using KMS keys
-    - Client-side encryption
-- Access Controls
-    - using IAM policies
-- SQS Access Policies
-    - useful for cross-account access to SQS queues
-    - useful for allowing other services like SNS, S3 etc to write to an SQS queue
+### Encryption:
+- In-flight encryption using HTTPS API
+- At-rest encryption using KMS keys
+- Client-side encryption
+### Access Controls
+- using IAM policies
+### SQS Access Policies
+- used when other AWS services like Lambda, SNS, S3 need to send messages to the queue
+- used when you want to access SQS across accounts
 
 ## Message Visibility Timeout
-Once a message is polled by a consumer, it remains invisible to other consumers until the Message Visibility Timeout is over.
-
-- by default, 30 seconds
-- a consumer can call ChnageMessageVisibility API to change visibility settings for a message
+Once a message is polled by a consumer, it remains invisible to other consumers until the Message Visibility Timeout has expired.
+- by default, the timeout is `30 seconds`
+- a consumer can call `ChangeMessageVisibility` API to change visibility settings for a message
 
 ## Long Polling
-Consumers can optionally 'wait' for messages to arrive if there are None in the queue
+`WaitTimeSeconds` is the amount of time consumers wait while polling when there are no messages in the queue.
+It can be set:
+- per API call `ReceiveMessage(WaitTimeSeconds)` by the consumer
+- at queue level as `ReceiveMessageWaitTimeSeconds`
+- useful to reduce the number of API calls made to SQS
+- `WaitTimeSeconds` can be 0 (short polling) to 20 seconds
 
-- reduce number of API calls made to SQS
-- can be enabled at queue level of at the API level using WaitTimeSeconds
-- WaitTimeSeconds can be 1 to 20 seconds
-- always preferable to Short Polling
 
 ## FIFO Queues
-### Features
-- guaranteed order (within message group)
-- Message Group ID mandatory
-- 300 msg/s (with no batching), 3000 msg/s (with batching)
-- exactly-once send capability (removes duplicates using deduplication id)
+FIFO queues support two special fields:
+- `MessageGroupId`: a mandatory attribute that groups related messages together for ordering.
+- `MessageDeduplicationId`: a unique identifier for each message to prevent duplicates.
+
+These two fields ensure that `all messages within a message group are processed in order and exactly once`.
+
+FIFO queues offer 300 msg/s (without batching) 3000 msg/s
 
 
+
+## Standard Queues vs FIFO Queues
+|Standard|FIFO|
+|--------|----|
+|At-least-once delivery to the queue|Exactly-once delivery to the queue|
+|Best-effort ordering|Strict ordering within message groups|
+|Unlimited throughput|300 messages/second (without batching), 3000 messages/second (with batching)|
+|No deduplication|Built-in deduplication using MessageDeduplicationId|
+|No message grouping|MessageGroupId for grouping related messages|

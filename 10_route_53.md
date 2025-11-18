@@ -68,10 +68,7 @@ Alias
     - If Health Check fails, Route 53 responds with Secondary instance's IP.
 
 - Latency based
-    - redirect to resource that is closes to client
-    - latency between AWS regions and uSers
-    - can have health checks
-    - records will have a Region
+    - use when you have resources in multiple AWS Regions and you want to route traffic to the region that provides the best latency.
 
 - Geolocation
     - serve records ubased on user location 

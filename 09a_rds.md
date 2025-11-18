@@ -28,6 +28,8 @@ managed relational database using SQL as a query language
 - 99.95% uptime
 - you get a read/write endpoint
 
+**Note:** Even with a Multi-AZ setup a database `engine-level upgrade` will simultaneously upgrade both active and standby databases and will thus incur a downtime.
+
 ## Single-AZ DB Instance (1 instance)
 - creates a single instance in a single AZ
 - 99.5% uptime
