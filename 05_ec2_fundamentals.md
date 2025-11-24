@@ -54,6 +54,13 @@ Capabilities
 * 80,443 = HTTP/HTTPs
 
 # EC2 -  Purchase Options
+|Purcahse Option|Cost|Commitment|Upfront Payment|Recommended For|Limits|Other Notes|
+|---|---|---|---|---|---|---|
+On-Demand|Highest cost; pay-per-use|No|No|Short un-interrupted workloads where app behavior cannot be predicted|vCPU limit per region per instance type|-|
+Reserved Instances|upto 72% discount; reserved|Yes (1-3 years)|Yes/Partial|Steady-state long running usage patterns like a database|20 per region|Convertible Reserved Instances (can change type, instance family, OS, scope etc) but you get less discount than Reserved.|
+Savings Plans|upto 72% discount; reserved + pay-per-use|Yes (1-3 years)|Yes/Partial|Steady-state long running workloads that don't need capacity reservation and requires flexibility within an instance family|None|locked in to a specific instance family but can change size, OS and tenancy|
+Spot Instances|upto 90% discount|No|No|Fault-tolerant workloads|Dynamic Spot limit per region|-|
+
 ### On-Demand instances
 Pay for what you use. 
 
@@ -189,15 +196,26 @@ can attach to one instance at a time
 * EC2 can access partition info with metadata service
 * HDFS, Cassandra, Kafka
 
+## Placement Groups Comparison
+|Feature|Cluster|Spread|Partition|
+|---|---|---|---|
+|Throughput|Highest|Average|High within a partition|
+|Fault Tolerance|Lowest|Highest|High|
+|Max Instances/AZ|Unlimited|max 7 instances|max 7 partition but each partition can have hundreds of instances|
+|Recommended for|High performance computing, BigData|High availability, mission-critical|Distributed and replicated workloads, cassandra, kafka, HDFS|
+
 ## Elastic Network Interface (ENI)
-* logical component in a VPC that represents a virtual network card
+A virtual network card
+* logical component within a VPC
+* bound to an AZ
+* instance-agnostic: can be detached and attached to different instances
+* useful for fast failovers within an AZ
 * An ENI can have:
-    * 1 Primary private IPv4, one or more secondary IPv4
-    * 1 EIP (IPv4) per private IPv4
-    * 1 Public IPv4
-    * One or more SGs
+    * 1 Primary private IPv4 address (Mandatory)
+    * 1 or more secondary IPv4 addresses (Optional)
+    * 1 EIP (IPv4) tied to the primary private IPv4 address (optional)
+    * One or more Security Groups
     * a MAC address
-* You can create ENI independently and move (except primary ENI ) them across EC2 instances for failover
 * bound to a specific AZ
 * https://aws.amazon.com/blogs/aws/new-elastic-network-interfaces-in-the-virtual-private-cloud/
 

@@ -1,8 +1,8 @@
-# Amazon Kinesis Data Streams
-Store streaming data in real-time
+# Amazon Kinesis Data Streams (KDS)
+Real-time streaming ingestion that you consume/process yourself (e.g., Lambda, Kinesis Client Library apps).
 
 ## Features
-- Retention: upto 365 days
+- Retention: 24 hours to 365 days
 - Replay: conumsrs can replay data
 - Expiration: data cannot be deleted (until it expires)
 - Message Size: upto 1MB (small, real-time data)
@@ -11,16 +11,27 @@ Store streaming data in real-time
 - Kinesis Producer Library (KPL) to write an optimized producer application
 - Kinesis Client Library (KCL) to write an optimized consumer application
 
-## Capacity Modes
-- Provisioned mode:
-    * choose number of shards
-    * each shard gets 1MB/s or 1k records/s IN
-    * each shard gets 2MB/s OUT
-    * scale manually
-    * cost -> per shard per hour
+## Producers
+- Apps using Kinesis Producer Library (KPL) or AWS SDK
+- AWS Lambda
+- AWS IoT Core
+- AWS Firehose/CloudWatch
 
-- On-demand mode:
-    * default: 4MB/s or 4k records/s
-    * auto-scale based on observed throughput in last 30d
-    * cost -> per stream per hour & data(in GB) in/out
+## Capacity Modes
+`Provisioned Mode`: 
+Manually scale by defining the number of shards
+- Each shard gets a fixed throughput:
+    - 1MB/s or 1k records/s IN
+    - 2MB/s OUT
+- scale manually
+- cost -> per shard per hour
+
+`On-demand mode`:
+Kinesis automatically scales based on observed throughput in last 30d
+- starts with 4MB/s or 4k records/s
+- auto-scale based on observed throughput in last 30d
+- $/stream/hour & data(in GB) in/out
+
+## Partitioning
+
 

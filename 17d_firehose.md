@@ -1,5 +1,5 @@
 # Amazon Data Firehose
-A "near" real-time Service that can push/pull data from various sources like Kinesis, CloudWatch, IoT etc
+Fully managed delivery pipeline that automatically loads streaming data into AWS services (S3, Redshift, OpenSearch, Splunk, Datadog, etc.).
 
 ## Features
 - fully-managed & serverless
@@ -11,22 +11,21 @@ A "near" real-time Service that can push/pull data from various sources like Kin
     - custom HTTP endpoint 
 - supports CSV, JSON, Patquet, Avro, RawText, Binary Data
 
-## Differences between Kinesis & Firehose
-* Kinesis:
-    - streaming data collection
-    - real-time
-    - Producer/Consumer code
-    - Provisioned/On-Demand 
-    - Storage: 365 days retention
-    - Replayable
 
-* Firehose:
-    - loading of streaming data into various destinations
-    - near real-time (has a buffer)
-    - fully-managed
-    - auto-scaled
-    - no Storage
-    - Not replayable
+## Kinesis vs Firehose
+|Kinesis|Firehose|
+|---|---|
+|A semi-managed, real-time streaming service that you consume/process yourself using Lambda or a Kinesis Client Library (KCL) apps|A fully-managed, near real-time delivery pipeline that automatically loads streaming data into AWS services (S3, Redshift, OpenSearch, Splunk, Datadog, etc.)|
+|processes events in real-time with low latency (milliseconds)|buffers data before delivery in near real-time (seconds to a minute based on buffer size)|
+|Manual shard-management and scaling|Fully-managed, Auto-scaled|
+|Retention: 1-365 days configurable|No storage beyond the buffer|
+|Replayable|Not replayable|
+|No processing of data|Can process data (Lambda, built-in transformations) like JSON -> Parquet/Avro/ORC|
+|destinations can only be Lambda or KCL apps|destinations can be S3, Redshift, OpenSearch, Custom HTTP endpoint, Datadog, Splunk|
+| Guarantees Ordering within a shard | No ordering|
+|Usecases: Real-time dashboards, Fraud detection, IoT Telemetry, custom stream-processing apps| Usecases: delivery logs from apps/cloudwatch to s3, ingest data into a DataLake, load clickstream into Redshift, send logs to Opensearch/Splunk|
+
+
 
 ## SQS vs SNS vs Kinesis
 * SQS
