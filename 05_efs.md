@@ -1,66 +1,73 @@
 # Elastic File System (EFS)
-is a managed Network File System(NFS)
-Highly Available and Scalable but expensive (3x gp2 cost) ; Pay per use.
-Only compatible with Linux based AMIs (not Windows)
-Encrypted at rest using KMS
-Supports POSIX permissions
-serverless, fully-elastic file storage compatible with Linux based AMIs.(supports NFSv4.1 protocol)
+is a managed Network File System(NFS) compatible with Linux AMIs and supports POSIX permissions.
 
-## Availability
-- EFS Standard 
-    - Multi-AZ
-    - good for Production
-    - Offers `99.99%` availability.
-- EFS One Zone 
-    - Single AZ
-    - good for Dev/Testing
-    - Offers `99.9%` availability.
+It is Serverless, highly available, and scalable but expensive (3x gp2 cost); pay per use.
+
+
+## EFS vs EBS
+| Feature | EFS | EBS |
+|---------|-----|-----|
+|Type|Managed NFS compatible with Linux AMIs|Block Storage|
+|Usecases|Shared storage, web servers, CMS, container workloads, home directories|Databases (RDS-like), boot volumes, application disks, low-latency transactional workloads|
+|Accessibility|Shared across multiple EC2 instances|Attached to a single EC2 instance at any time|
+|Availability|Highly available across AZs|Single AZ (with Snapshots for DR)|
+|Cost|Expensive (3x gp2); pay-per-use|Cheaper; pay for provisioned|
+|Scalability|Serverless, fully elastic|Fixed size, needs manual scaling|
+
+
+## Availability Modes
+|EFS Standard|EFS One Zone|
+|------------|------------|
+|Multi-AZ    |Single AZ   |
+|99.99% Availability|99.9% Availability|
+|Used for production workloads|Used for development workloads|
+|More expensive|Less expensive|
 
 **Note:** Automatic daily backups are enabled by default.
 
 ## Throughput Mode
-- `Elastic` to let the throughput scale with workload. Good for unpredictable workloads.
-- `Bursting` to let the throughput scale with workload size. 
-- `Provisioned` to set a fixed throughput limit. Good for predictable workloads.
+|Mode|Description|Use Case|
+|----|-----------|--------|
+|Elastic|Let the throughput scale with workload|Unpredictable workloads|
+|Bursting|Let the throughput scale with workload size|Variable workloads|
+|Provisioned|Set a fixed throughput limit|Predictable workloads|
 
 ## Performance Mode
-- `General Purpose` for most workloads 
-- `Max I/O` mode is typically used for parallelized workloads that can tolerate higher latency. Not available if you select 'elastic' throughput mode.
 
-**Note:** This setting cannot be changed after the file system is created.
+|Mode|Description|Use Case|
+|----|-----------|--------|
+|General Purpose|Optimized for quick response times|Most workloads|
+|Max I/O|Optimized for high-throughput, parallel workloads that can tolerate higher latency|High-performance computing|
+
+
+**Notes:** 
+- You can't change the performance mode after creation.
+- Max I/O mode is not available with 'elastic' throughput mode.
 
 
 
 ## Storage Classes
-- EFS-Standard 
-    - default storage class 
-    - uses `SSD` storage 
-    - provides `sub-millisecond` first-byte latency.
-- EFS-IA 
-    - for infrequently accessed (a few times a quarter) data 
-    - less cost to store, but additionl cost for access.
-    - offering millisecond first-byte latency. 
-    - has `minimum billing charge` per file of `128KB` 
-- EFS-Archive 
-    - rarely access data (few times a year)
-    - about 50% less cost to store, but additionl cost for access.
-    - has `minimum billing charge` per file of `128KB` 
+|Feature|EFS-Standard|EFS-IA|EFS-Archive|
+|-------|------------|------|-----------|
+|Default|Yes|No|No|
+|Used for|General purpose|Infrequent access (few times a quarter)|Rare access (few times a year)|
+|Storage Costs|Higher|Medium (but has access fees)|Lower (but has access fees)|
+|Access latency|Sub-millisecond|Millisecond|Seconds|
+|Minimum billing|-|128KB per file|128KB per file|
 
 **Note:** 
 * You can move data across storage tiers using lifecycle policies.
-* You can use EFS One Zone-IA for upto 90% savings
+* You can use EFS One Zone-IA for up to 90% savings
 
 ## EFS Access Points
-are application-specific entry points that allow working on shared datasets. 
+are `application-specific` entry points into EFS.
 
+### Benefits
+- Simplified Access Control: each application get's its own UID, GID and posix permissions
+- Path isolation: restrict applications to specific paths within the EFS
 
-- can be shared by EC2 instances across AZs
-- HA, 3x gp2 cost, pay per use
-- UC: Content Management, Web Serving, Data sharing, Wordpress
-Uses NFSv4.1 protocol
-uses SG to control access to EFS
-compatible with ONLY Linux based AMIs (not Windows)
-enable ecnryption-at-rest- using KMS
+Note: You can have multiple Access Points per EFS
+
 
  
 

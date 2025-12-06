@@ -1,14 +1,17 @@
 # Elastic Block Store (EBS)
-a networkd drive you can attach to your instances.
+a networked drive you can attach to your instances as a logical volume.
 
-Features:
-* allows to persist data even after instance terminates
+## Features:
+* EBS Volumes persist beyond the life of an instance (controlled by "Delete on Termination" option)
+* EBS Volumes can be detached and reattached to different instances
+
+Note: By default, when an instance is terminated, the root EBS volume is deleted unless "Delete on Termination" is disabled.
+
+
+## Limitations:
 * can only be mounted to one instance at a time; 
-* but can be detached and attached to other instances
 * bound to an AZ; you can move a volume across AZs using snapshotting
-* define capcaity & IOPS in advance 
-* "Delete on Termination" option controls behavior of EBS volume when the instance terminates
-    - by default, ONLY the root EBS volume is deleted
+* define capacity & IOPS in advance 
 
 ## EBS Snapshots
 Make a point-in-time backup of your EBS volume
