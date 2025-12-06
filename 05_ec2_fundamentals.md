@@ -3,7 +3,6 @@
 Elastic Cloud Compute let's you launch a Linux/Win/Mac based virtual machine. 
 
 
-
 Capabilities
 * Rentint Vms
 * Virtual drives EBS
@@ -155,16 +154,18 @@ Spot Block
 - NOTE: when stopping Spot Instances for good, first make sure the Spot Request is cancelled
 
 ## Spot Fleets
-* set of Spot Instances + (optional) On-Demand Instances
-* The Spot Fleet will try to meet the target capacity with price constraints:
-    * Define possible launch pools: instance types, OS, AZs
-    * can have multiple launch pools to choose from
-    * Spot Fleet stops launching instances when reaching capacity or max cost
-* Strategies to allocate Spot Instances:
+* Specify a Spot Fleet request:
+    - Target Capacity : instances or vcpu/mem
+    - Network/Azs
+    - Instance Requirements: Instance Types or min/max vcpu,mem
+    - Allocation Strategy
+* can include a set of Spot Instances + (optional) On-Demand Instances
+* can automatically replace interrupted Spot Instance
+* Allocation Strategy:
     * lowestPrice: from the pool with lowest price(cost optimization)
     * diversified: distribute across all pools (availability)
-    * capacityOptimized: pool with optimal capacity for number of instances
-    * priceCapacityOptimized(recommended): pools with highest capcaity, then select the pool with the lowest price (best choice for most workloads)
+    * capacityOptimized: pool with highest spare capacity. ie. Least likely to be interrupted.
+    * priceCapacityOptimized(recommended): pools with highest capacity, then select the pool with the lowest price (best choice for most workloads)
 
 ## Elastic IP
 fixed public IPv4 address for your EC2 instance
@@ -173,14 +174,14 @@ can only have 5 EIPs per region per account ( you can ask AWS to increase)
 can attach to one instance at a time
 
 ## Placement Group
-* cluster - clustred in a low latency group in a single AZ
+* cluster - clustred in a low latency group in a single AZ. 
 * spread - spread across different hardware (max 7 instances per group per AZ) - Critical Apps
 * partition - spreads instances across partitions (which rely on different racks) within AZ. Scales to 100s of Ec2 instancces per group (Hadoop, Cassandra, Kafka)
 
 ## Cluster
 * 10Gbps bandwidth between instances; low latency
 * No fault tolerance; single AZ
-* useful for BigData jobs, apps that need extreme low latency
+* useful for HPC, BigData, machine learning jobs that need extreme low latency
 
 ## Spread
 * high fault-tolerance; across AZs; across physical hardwares
