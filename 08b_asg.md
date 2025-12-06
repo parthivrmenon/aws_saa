@@ -1,15 +1,5 @@
 # Auto-Scaling Groups (ASG)
-An Auto Scaling group is a logical grouping of EC2 instances that allows you to use Auto-scaling features on them such as 
-* health check replacements
-* scaling policies
-
-When an ASG is created, it starts by launching enough EC2 instances to meet the desired capacity and then maintains that number of instances by doing periodic health checks on the instances in the group and replacing any that are not healthy.
-
-The size of an Auto Scaling group depends on the number of instances that you set as the desired capacity. You can adjust its size to meet demand, either manually or by using automatic scaling.
-
-When instances are launched, if you specified multiple Availability Zones, the desired capacity is distributed across these Availability Zones. If a scaling action occurs, Amazon EC2 Auto Scaling automatically maintains balance across all of the Availability Zones that you specify.
-
-An ASG can contain On-Demand, Spot or a mix of both.
+An Auto Scaling group is a logical grouping of EC2 instances that allows you to use Auto-scaling features.
 
 ## Health Checks
 All instances in an ASG start with a health check status of "Healthy". An ASG can receive notifications that an instance is unhealthy from various sources:
@@ -59,13 +49,22 @@ Increase and decrease the current capacity of the group based on a set of scalin
 - If the average CPU usage of your Auto Scaling group exceeds 70%, add 2 EC2 instances to the group.
 - If the average CPU usage of your Auto Scaling group exceeds 80%, add 4 EC2 instances to the group.
 
+##### Instance Warm-Up:
+Both `Step-Scaling` and `Target tracking` scaling use the instance warm-up period to prevent premature scale-in actions.
+ASG ignores new instances and their metric contributions until the warm-up period is expired. This helps prevent premature Scale-In. Defaults to 300 seconds.
+
+
+
 #### Simple scaling
-Increase and decrease the current capacity of the group based on a `single` scaling adjustment, with a `cooldown period` between each scaling activity.
+Increase and decrease the current capacity of the group based on a `single` scaling adjustment, with a `cooldown period` (default is 300 seconds) between each scaling activity.
 
 **Example:**
 - If the average CPU usage of your Auto Scaling group exceeds 70%, add 2 EC2 instances to the group.
 
-
+##### Cooldown Period
+- The cooldown period is the amount of time, in seconds, after a scaling activity completes before another scaling activity can start. 
+- The default cooldown period is 300 seconds.
+- Cooldown period prevents premature scaling activities
 
 ### Scale proactively
 Predictive scaling works by analyzing historical load data to detect daily or weekly patterns in traffic flows
