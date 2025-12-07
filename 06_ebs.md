@@ -66,6 +66,8 @@ backups and replication is recommended
 EBS volumes are characterized by Size|Throughput|IOPS
 Only gp2/gp3 and io1/io2 can be used as boot volume
 
+Single root I/O virtualization (SR-IOV) enables higher I/O performance for EBS volumes.
+
 
 ## EBS Multi-Attach - io1/io2 family
 atach the same EBS volume to multiple EC2 in the same AZ

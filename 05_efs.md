@@ -1,6 +1,5 @@
 # Elastic File System (EFS)
 is a managed Network File System(NFS) compatible with Linux AMIs and supports POSIX permissions.
-
 It is Serverless, highly available, and scalable but expensive (3x gp2 cost); pay per use.
 
 
@@ -28,8 +27,8 @@ It is Serverless, highly available, and scalable but expensive (3x gp2 cost); pa
 ## Throughput Mode
 |Mode|Description|Use Case|
 |----|-----------|--------|
-|Elastic|Let the throughput scale with workload|Unpredictable workloads|
-|Bursting|Let the throughput scale with workload size|Variable workloads|
+|Elastic|Throughput scales elastically as per demand|Unpredictable workloads|
+|Bursting|Throughput scales based on storage size of your filesystem|Variable workloads|
 |Provisioned|Set a fixed throughput limit|Predictable workloads|
 
 ## Performance Mode
