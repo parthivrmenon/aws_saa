@@ -133,7 +133,7 @@ support ALLOW rules only | support ALLOW and DENY rules |
     - an Internet connection through an IGW
     - an Internet connection in a private subnet via NATGW/NAT instance
     - a Gateway VPC Endpoint to an AWS service like S3
-    - 
+
 
 ## VPC Endpoints
 - VPC Endpoints (powered by AWS PrivateLink) allow you to connect to AWS services using a private network instead of using the public internet.

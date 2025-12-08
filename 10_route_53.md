@@ -1,10 +1,10 @@
 # Route 53
-a highly available, scalable. fully-managed DNS service
+a **fully-managed** DNS service
 that you can use to manage your domains. (ie. Authoritative DNS server)
-- it is also a Domain Registrar
+- it is also a **Domain Registrar**
 - ability to check the health of your resources
 - 100% availability SLA
-- "Route 53" is a reference to traditional DNS port
+- "Route 53" is a reference to traditional DNS port.
 
 ## Route 53 - Records
 eg: google.com.             300     IN      A       142.251.222.142
@@ -21,11 +21,11 @@ others: CAA/DS/MX/NAPTR/PTR/SOA/TXT/SPF/SRV
 
 Note: You cannot create a CNAME for Apex domain
 
-## Hosted Zone
-Public Hosted Zone contains records that specify how to route traffic on the internet
-Private Hosted Zone contains records that specify how you route traffic within one or more VPCs
+## Hosted Zones
+- **Public Hosted Zone** contains records that specify how to route traffic on the internet
+- **Private Hosted Zone** contains records that specify how you route traffic within one or more VPCs
 
-Note: You pay 0.50$ per month per hosted zone
+**Note**: You pay **0.50$/month/zone**
 
 ## Records TTL (Time To Live)
 duration of time for which clients will cache a DNS record
@@ -49,28 +49,29 @@ Alias
 - NOTE: You cannot set an ALIAS record for an EC2 DNS name
 
 ## DNS Routing Policies
-- Simple
-    - used to route traffic to a single resource
+- **Simple**
+    - a **regular DNS record**.
+    - routes traffic to a single resource
     - can return multiple values in the same record ie. client-side load-balanced 
     - when Alias enabled, specify only one AWS resource
     - cannot be associated with Health-checks
 
-- Weighted
+- **Weighted**
     - can be used to load-balance traffic across regions or for testing
     - each record is assigned a 'relative' weight
     - traffic % = weight of record/ sum of weights of all records
     - ALL records must have same Name and Type
     - a record with weight 0 is never used in a response, however if all weights are 0 then all records are returned.
 
-- Failover
+- **Failover**
     - Usecase: Active-Passive failover
     - Primary is associated with a Health Check (mandatory)
     - If Health Check fails, Route 53 responds with Secondary instance's IP.
 
-- Latency based
+- **Latency-based**
     - use when you have resources in multiple AWS Regions and you want to route traffic to the region that provides the best latency.
 
-- Geolocation
+- **Geolocation**
     - serve records ubased on user location 
     - location can be specified using Continent, Country, State
     - If there is overlapping the most precise location is selected
@@ -78,13 +79,12 @@ Alias
     - Use Cases: website localization, restrict content distribution, load balancing
     - can be associated with Health Checks
 
-- Multi-Value Answer
-    - return multiple records
-    - can be associated with Health Checks
-    - upto 8 Healthy records
-    - client-size loadbalancing
+- **Multi-Value Answer**
+    - return multiple records (maximum of 8)
+    - can be associated with Health Checks so that only healthy records are returned
+    - client-side loadbalancing
 
-- Geoproximity (using Route 53 Traffic Flow feature)
+- **Geoproximity** (using Route 53 Traffic Flow paid feature)
     - Resources can be assigned a 'bias' (1 to 99, -1 to -99)
     - a bias controls the size of the region considered as within proximity
     - +ve values of bias increase the size, -ve values decrease it
@@ -94,7 +94,8 @@ Alias
         - Non-AWS resources (specify Latitude and Longitude)
     - NOTE: You must use Route 53 Traffic Flow (advanced) to use this feature
     - usecase: shift traffic based on geographic proximity
-- IP-based Routing
+
+- **IP-based Routing**
     - provide a list of CIDRs and the corresponding endpoints/locations
     - optimize performance & reduce network costs
     - eg: route end-users from a particular ISP to a specific endpoint

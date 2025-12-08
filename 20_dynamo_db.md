@@ -51,7 +51,7 @@ Global tables provide the following benefits:
 ## Backups - On-Demand
 - create full backups of your tables for long term retention and compliance
 - backups do not impact performance and you can backup tables of any size.
-- backups can be copied  across Accounts and Regions. 
+- backups can be copied  across Accounts and Regions using AWS Backups.
 - older backups can be transitioned to cold storage for cost-optimization.
 
 
