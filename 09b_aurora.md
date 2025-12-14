@@ -29,19 +29,19 @@ Replica Auto-Scaling
 - auto replica scaling using CPU, Connection targets across heterogenous instances
 - Reader endpoint automatically extends to include new replicas
 
-Custom Endpoints
-- allows subset of instances to be defined as a custom DNS endpoint
+## Aurora - Custom Endpoints
+- allows a subset of cluster instances to be defined as a custom DNS endpoint
 - when using custom endpoints, reader endpoint is usually no longer used
 - eg: run analytical queries on specific (more optimized) replicas
 
-Aurora Serverless
+## Aurora Serverless
 - auto database instantiation and scaling based on actual usage
 - good for infrequent, intermittent, unpredictable workloads
 - no capacity planning needed
 - pay-per-second model (more cost-effective)
 - clients talk to "Proxy Fleet" (AWS managed proxy layer)
 
-Global Aurora
+## Global Aurora
 Aurora Cross Region Read Replicas
 - useful for disaster recovery
 - simple setup

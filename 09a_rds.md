@@ -35,21 +35,29 @@ managed relational database using SQL as a query language
 - 99.5% uptime
 - no redundancy
 
-# RDS - Storage Types
-* General Purpose SSD (gp2)
-* General Purpose SSD (gp3)
-* Provisioned IOPs (io1)
-* Provisioned IOPs (io2)
+# RDS - Storage
+- **Storage type**:
+    * General Purpose SSD (gp2)
+    * General Purpose SSD (gp3)
+    * Provisioned IOPs (io1)
+    * Provisioned IOPs (io2)
+
+- **Allocated storage:**
+    * General Purpose: 20GiB to 65TiB
+    * Provisioned IOPs: 100GiB to 64TiB
+
+- **Provisioned IOPs**:
+    - only for io1/io2
+    - for gp2/gp3, it is automatically calculated based on storage size
+    - 1k - 256k IOPs
+
+
 
 # RDS - Storage Auto Scaling
-increase storage dynamically
-- you set a Maximum Storage Threshold
-- Automatically modify storage if:
-    - free storage is less than 10% of allocated storage
-    - Low-Storage lasts at least 5 minutes
-    - 6 hours have passd since last modification
-- useful for applications with unpredictable workloads
-- supports ALL RDS engines.
+You can optionally select **enable storage autoscaling** which allows storage to increase dynamically.
+- **Condition for scaling**: *If free storage is less than 10% of allocated storage for at least 5 minutes and 6 hours have passed since last storage modification*
+- **Maximum Storage Threshold**: Autoscaling will scale storage from the "Allocated Storage" upto this limit. 
+- **Best-suited for**: applications with unpredictable workloads
 
 
 ## Features
@@ -102,15 +110,16 @@ Available for Managed Oracle and MS SQL Server Database
 De-activate Automation Mode to perform customization,
 advised to take DB snapshots before
 
-## RDS Backups
-Automated backups:
-- daily full backup during the backup window
-- transaction logs are backed-up every 5 minutes; (ie: most recent backup would be 5 minutes ago)
-- 1-35 days of retention; (set 0 to disable automated backups)
+## RDS - Backup
+**Automated backups**:
+A daily full backup is taken during the backup window.Transaction logs are backed-up every 5 minutes.(RPO: 5 minutes)
+- `Backup Retention Period`: 1-35 days; set 0 to disable.
+- `Backup window`: UTC time range for backup. Set No Preference to disable 
 
-Manual DB snaphosts:
-- retain backups as long as user wants
-- can be used for infrequently used RDS (restore from snapshot rather than turning it off as you would still need to pay for storage even for a stoppped RDS instance)
+**Manual DB snapshots**:
+You can opt for manual DB snapshots if:
+- you want to retain backups for longer periods.
+- for infrequently used RDS (restore from snapshot rather than turning it off as you would still need to pay for storage even for a stopped RDS instance)
 
 
 # RDS - Database Authentication
@@ -122,13 +131,15 @@ use database engine's `native` credentials management.
 - uses a short-lived (15 min) token for authentication.
 - you can use `IAM users and roles` to control access to your DB
 - for applications running on EC2, you can use `EC2's profile` credentials.
-- traffic to/fro is encrypted using TLS.
+- traffic to/fro is encrypted using TLS to protect the token.
 
-# RDS - Enabling TLS for Microsoft SQL Server
-for Microsoft SQL Server, use one of the below two options:
+### Exam: Enabling TLS in-transit for Microsoft SQL Server engine
+for Microsoft SQL Server engine, use one of the below two options:
 
-- Force SSL for all connections using the rds.force_ssl option. This happens transparently to the client, and the client doesn't have to do any work to use SSL.
+- Force SSL for all connections using the **rds.force_ssl** option. This happens transparently to the client, and the client doesn't have to do any work to use SSL.
 - Encrypt specific connections — this sets up an SSL connection from a specific client computer, and you must do work on the client to encrypt connections.
+
+
 
 
 

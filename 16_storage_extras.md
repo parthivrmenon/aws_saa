@@ -80,7 +80,7 @@ It provides low-latency access to frequently used data by caching it locally whi
 ### Types of gateways
 - **File Gateway**: Provides **file-based** access to cloud storage via **SMB and NFS** protocols, suitable for applications requiring a file interface, such as some Microsoft SharePoint or SQL Server deployments. 
 - **Volume Gateway**: Provides block storage **iSCSI** volumes that can be used for applications like databases that require block storage interfaces. 
-- **Tape Gateway**: Offers a virtual tape library (VTL) for backup and archiving workloads, allowing you to replace physical tape with cloud storage for cost savings and durability. 
+- **Tape Gateway**: Offers a **virtual tape library (VTL)** for backup and archiving workloads, allowing you to replace physical tape with cloud storage for cost savings and durability. 
 - **FSx File Gateway**: Provides access to in-cloud Amazon FSx for Windows File Server shares from on-premises locations. 
 
 ### S3 File Gateway
@@ -118,9 +118,9 @@ A Virtual Tape Library (VTL) backed by S3 and Glacier
 - helpful for daily NFS backups in small data centers
 
 ## AWS Transfer Family
-fully managed service for file transfers into and out of Amazon S3 or EFS over FTP protocol
-- Supported protocols: FTP, FTPS, SFTP
-- pay-per provisioned endpoint per hour + data transfers in GB
+fully managed service for file transfers in and out of AWS services like S3/EFS using traditional file transfer protocols like FTP, FTPS, SFTP
+- you expose and endpoints that partners can use to upload/download files to to/from S3/EFS.
+- pay-per `endpoint/hour/GB`
 - store and manage user credentials within the service
 - integrate with existing authentication systems (AD, LDAP, Okta, Cognito, custom..)
 - Usage: sharing files, public datasets, CRM, ERP...
