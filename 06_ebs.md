@@ -9,13 +9,14 @@ a network-attached drive you can mount on to your instances as a logical volume.
     - throughput changes
     - volume type changes
 
-Note: By default, when an instance is terminated, the root EBS volume is deleted unless "Delete on Termination" is disabled.
+**Note**: By default, when an instance is terminated, the root EBS volume is deleted unless `Delete on Termination` is disabled.
 
 
 ## Limitations:
 * can only be mounted to one instance at a time; 
 * bound to an AZ; you can move a volume across AZs using snapshotting
 * define capacity & IOPS in advance 
+* you are charged for the provisioned capacity and not for what you actually use.
 
 ## EBS Snapshots
 Make a point-in-time backup of your EBS volume
@@ -30,15 +31,20 @@ Make a point-in-time backup of your EBS volume
 * Fast Snapshot Restore (FSR)
     * force full init of snapshot to have no latency on first use
     * very expensive
-* **Data Lifecycle Manager** can be used to create EBS Snapshot management policies which:
-    - schedule automatic EBS snapshots
+* **Data Lifecycle Manager** can be used to automate the EBS Snapshot lifecycle:
+    - create snapshots for EBS based on tags
+    - schedule EBS snapshots
     - delete snapshots after the retention period
+    - disaster recovery using cross-region/cross-account copying of snapshots.
 
 ## Amazon Machine Image (AMI)
-offers a way to customize an EC2 instance
-you can add software, config, OS, monitoring etc
-faster boot/config time because software is pre-packaged
-AMIs are built for specific region and can be copied across regions
+an AMI is a template for launching EC2 instances
+which included the software, configuration, OS, monitoring etc.
+
+Benefits:
+- faster boot/config time because software is pre-packaged
+- AMIs are built for specific region and can be copied across regions
+
 An EC2 instance can be launched from
 - Public AMIs
 - Marketplace AMI
@@ -46,9 +52,11 @@ An EC2 instance can be launched from
 - **Data Lifecycle Manager** policies can be used to automate AMI creation and cleanup.
 
 ## EC2 Instance Store
-is a high performance hardware disk (no network latency)
+is a high performance direct-attached hardware disk (no network latency)
+
 they are ephemeral, lost if EC2 is stopped
 good for buffer/cache/scratch data/temporary content
+
 risk of data loss if underlying hardware fails
 backups and replication is recommended
 
@@ -84,22 +92,13 @@ must use fs that is cluster aware (not XFS, EXT4, etc)
 - you can chose either the `(default) aws/ebs` AWS-Managed-Key (AMK) or create your own Customer Managed Key (CMK)
 - You can enable '*Always encrypt new EBS volumes*' option in EC2 > Settings
 
-### Encryption during transit
-all snapshots encrypted
-all volumes created from snapshot is encrypted
-
-encrypt/decrypt handled transparently
-has minimal impact on latency
-leverages keys from KMS(AES-256)
-
-to encrypt an unencrypted EBS volume
-- create an EBS snapshot (unencrypted)
-- copy the snapshot into same AZ with encryption OR create EBS with encryption enabled
+## EXAM - EBS Encrypting an unencrypted volume
+Follow these steps to encrypt an unencrypted EBS volume
+- stop the EC2 instance (not required but recommended)
+- create an EBS snapshot. This snapshot will be unencrypted.
+- copy the snapshot and enable encryption
+    - during the copy, enable encryption
+    - select a KMS key.
 - create EBS volume from this new encrypted snapshot
-
-- 
-
-
-
-
-
+- detach the unencrypted volume
+- attach the encrypted volume
