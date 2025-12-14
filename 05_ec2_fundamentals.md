@@ -167,16 +167,20 @@ You are `charged at On-Demand whether you run or not`
 
 Recommended for `mission-critical workloads with short-term usage`
 
-# CloudWatch Metrics for EC2
-### AWS provided metrics
-by default, AWS provides CPU, Network, Disk and Status Check metrics for your instances.
+## EXAM: EC2 - CloudWatch Metrics
+**Default(AWS Provided) CloudWatch metrics**:
+  - CPU Utilization
+  - Network In/Out
+  - Disk Read/Write
+  - Status Check Failed
 
-Basic Monitoring (default) collects these metrics at 5 min interval.
-You can enable Detailed Monitoring to collect metrics at 1 min interval but this is a paid feature.
+**Basic Monitoring (default)**: collects these metrics at 5 min interval.
 
-### Custom metrics
-If you want additional metrics like Memory Utilization, you can use CloudWatch Agent to collect and send custom metrics to CloudWatch.
-You can have Basic resolution (1min) or High resolution (upto 1 second).
+**Detailed Monitoring**: collect metrics at 1 min interval but this is a paid feature.
+
+**Custom Metrics**:
+If you want additional metrics like `Memory Utilization` or `Swap Usage`, you can use CloudWatch Agent to collect and send custom metrics to CloudWatch.
+You can have **Basic resolution (1min)** or **High resolution (upto 1 second)**.
 
 ## Spot Instances
 Define max spot price and get instance while current spot price < max
