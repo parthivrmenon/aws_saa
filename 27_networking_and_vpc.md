@@ -198,8 +198,15 @@ Option 2: Better and Free - Access from Private Network
 - you will have a single VGW and multiple CGWs
 
 ## Direct Connect (DX)
-- provides a dedicated private connection from a remote network into your VPC.
-- you need to setup a VPG on your VPC 
+Provides a dedicated private connection from on-premises to AWS.
+
+- you need to setup a `Private Virtual Interface (Private VIF)` on your VPC that connects to either a `Virtual Private Gateway (VGW)` or a `Transit Gateway (TGW)`
+- **Note:** 
+  - VIFs provide VLAN tagging and BGP peering.
+  - VGW and TGW acts as routers.
+  - For a single account/VPC use an VGW.
+  - For multiple accounts/VPCs use a TGW.
+
 - setup  a dedicated connection between your on-premises network and AWS Direct Connect location.
 - allows you to access both public and private AWS services over the same connection
 - Usecases:

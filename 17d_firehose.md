@@ -21,7 +21,7 @@ Fully managed delivery pipeline that automatically loads streaming data into AWS
 |Retention: 1-365 days configurable|No storage beyond the buffer|
 |Replayable|Not replayable|
 |No processing of data|Can process data (Lambda, built-in transformations) like JSON -> Parquet/Avro/ORC|
-|destinations can only be Lambda or KCL apps|destinations can be S3, Redshift, OpenSearch, Custom HTTP endpoint, Datadog, Splunk|
+|can be **consumed** by Lambda or KCL apps|can be **delivered** to S3, Redshift, OpenSearch, Custom HTTP endpoint, Datadog, Splunk|
 | Guarantees Ordering within a shard | No ordering|
 |Usecases: Real-time dashboards, Fraud detection, IoT Telemetry, custom stream-processing apps| Usecases: delivery logs from apps/cloudwatch to s3, ingest data into a DataLake, load clickstream into Redshift, send logs to Opensearch/Splunk|
 

@@ -43,6 +43,22 @@ Example: Granting access to an S3 bucket in Account B for a User in Account A
     - built-in identity store within IAM Identity Center
     - 3rd party: Active Directory, OneLogin, Okta etc
 
+## Identity Providers
+- **IAM Identity Center Built-In Identity Store**: enabled by default.
+- **External IdPs using SAML 2.0**:
+    - Azure AD
+    - Okta
+    - OneLogin
+    - Auth0
+    - any SAML 2.0 enabled apps
+- **Active Directory** (via AWS Directory Service or External AD)
+
+## Access to externally authenticated users (Identity Federation)
+- Cognito: Mobile/Web Apps (customer-facing) 
+- External Web/Social IdPs: Apps which rely on external social IdPs (Google, Facebook etc) using OIDC.
+- Enterprise SSO: Orgs managing their own IdPs like Active Directory using SAML 2.0.
+- Custom identity broker: When your IdP does not support SAML or OIDC, you can use a custom identity broker to authenticate users.
+
 ## Attribute-Based Access Control (ABAC)
 - define **PermissionSets** once
 - define fine-grained permissions based on user attributes (retrieved from Identity store)

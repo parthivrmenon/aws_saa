@@ -1,8 +1,7 @@
 # Serverless
 
 ## AWS Lambda
-- Short-lived Virtual Functions
-- runs On-Demand
+Short-lived, serverless compute functions that can be triggered on-demand.
 - Automatic scaling
 - Pricing:
     - pay per request + compute time
@@ -12,6 +11,9 @@
 - Monitoring via CloudWatch
 - can get upto 10GB of RAM (to improve CPU and Network performance)
 - Lambda Runtime API?
+- Resources:
+    - Memory: 128MB - 10GB (1MB increments)
+    - Disk: 512MB to 10GB ephemeral storage mounted at /tmp
 - Limits (Per-region)
     - Execution:
         - Memory : 128MB - 10GB (1MB increments)
@@ -32,9 +34,22 @@
     - can raise a support ticket to get a higher (>1000) limit.
     - Usecase: 
         * to ensure each caller gets equity
+
 - Provisioned Concurrency
-    - avoid "Cold" start
+    - ensures a specified number of lambda functions are initialized and ready to serve requests
+    - eliminates "Cold" start for that number of concurrent invocations
+    - you pay for provisioned concurrency even if idle
     - Application Auto Scaling can manage concurrency (schedule or target utilization)
+- SnapStart (only for JAVA, Python, .NET)
+    - runs the init phase once and then stores the state
+    - subsequent runs are faster
+    - use for unpredictable workloads (running on JAVA,Python,.NET) where provisioned concurrency is not cost-effective.
+- Encryption Helpers:
+    - Encryption helpers in Lambda let you use KMS to encrypt environment variable values when saving them, and Lambda automatically decrypts them at runtime using the execution role’s KMS permissions.
+
+- AWS Lambda with Container Image Support:
+    - allows you to use a docker container in ECR to be run as a lambda function
+    - easier to package runtime+dependecies compared to traditional lambda.
 
 
 

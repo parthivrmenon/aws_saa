@@ -86,11 +86,12 @@ Use Cases:
 
 
 # SSM Parameter Store
-- secure sotrage for secrets
-- optional encryption using KMS
+Older service for storing secrets.
+- store secrets in a key-value store using the `SecureString` data type.
+- secrets can be optionally encrypted using KMS
 - version tracking
-- integrates with IAM
-- integrates with CloudFormation
+- integrates with IAM for access control
+- integrates with CloudFormation for Infrastructure as Code
 - notifications via Amazon EventBridge
 - can acces AWS Secrets Manager secrets via /aws/reference/secretsmanager/secret_id
 ## Parameter Tiers
@@ -208,9 +209,10 @@ Use Cases:
 -  if you are prone to DDoS attacks, use Shield Advanced which gives you access to Shield Response Team (DRP) and also manages the WAF rules for you.
 
 # Amazon GuardDuty
+- is a managed **Intrusion Detection Service (IDS)**
 - intelligent `threat detection` service
 - uses Machine Learning/Anomaly Detection to detect threats
-- Input data:
+- **Input** data:
     - CloudTrail Logs
     - VPC Flow Logs
     - DNS Logs
@@ -219,7 +221,9 @@ Use Cases:
 - can protect against cryptocurrency attacks
 
 # Amazon Inspector
+- managed service for **finding CVEs/Vulnerabilities**
 - automated `security assessment` (vulnerabilities) service
+- **Scope**: EC2, Lambda, Container Images in ECR
 - EC2:
     - uses AWS System Manager (ASM) agent
     - detects unintended network access
@@ -230,10 +234,10 @@ Use Cases:
 - reporting with AWS Security Hub
 - send findings/events to AWS EventBridge
 
-# Amazon Macie
-- fully managed data security and privacy service
+# Amazon Macie          
+- fully managed **Data Security and Privacy** service
 - used ML and pattern matching to detect sensitive data
-- helps identify and alert you to Personally Identifiable Information (PII) breaches
+- helps identify and alert you to **Personally Identifiable Information (PII) breaches**
 - analyze data in S3
 - sends notifications to AWS EventBridge
 

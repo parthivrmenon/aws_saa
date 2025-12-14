@@ -54,9 +54,13 @@ It is Serverless, highly available, and scalable but expensive (3x gp2 cost); pa
 |Access latency|Sub-millisecond|Millisecond|Seconds|
 |Minimum billing|-|128KB per file|128KB per file|
 
+
 **Note:** 
 * You can move data across storage tiers using lifecycle policies.
 * You can use EFS One Zone-IA for up to 90% savings
+
+## EFS Lifecycle transitions
+EFS lifecycle transitions automatically move files from Standard → IA after 14–90 days of no access (configurable), then to Archive after an additional fixed 90 days, and any access moves them back to Standard.
 
 ## EFS Access Points
 are `application-specific` entry points into EFS.

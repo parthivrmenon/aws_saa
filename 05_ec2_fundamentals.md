@@ -1,13 +1,7 @@
 # Amazon EC2
 
-Elastic Cloud Compute let's you launch a Linux/Win/Mac based virtual machine. 
+**Elastic Cloud Compute** let's you launch a Linux/Win/Mac based virtual machine(s). 
 
-
-Capabilities
-* Rentint Vms
-* Virtual drives EBS
-* Load distribution ELB
-* Auto-scaling groups ASG
 
 ## Sizing & Configuration
 * OS: Linux, Win, MacOS
@@ -35,6 +29,46 @@ Capabilities
 * Memory Optimized (r')
 * Storage Optimized (d')
 * Accelerated Computing (p-type and g-type)
+
+# EC2 - Lifecycle States & Billing
+<table border="1">
+  <tr>
+    <th>State</th>
+    <th> Description</th>
+    <th>Billed</th>
+  </tr>
+  <tr>
+    <td>pending</td>
+    <td>The instance is preparing to enter the running state. An instance enters the pending state when it is launched or when it is started after being in the stopped state</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>running</td>
+    <td>The instance is running and ready for use.</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>stopping</td>
+    <td>The instance is preparing to be stopped.</td>
+    <td>No, but if you hibernate an instance it is billed for the time it is in stopping state.</td>
+  </tr>
+  <tr>
+    <td>stopped</td>
+    <td>The instance is shut down and cannot be used. The instance can be started at any time.</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>shutting-down</td>
+    <td>The instance is preparing to be terminated.</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>terminated</td>
+    <td>The instance has been permanently deleted and cannot be started.</td>
+    <td>No, but Reserved Instances are billed until the end of their term according to their payment option.</td>
+  </tr>
+</table>
+
 
 ## Security Groups
 * controls how traffic is allowed in or out of EC2 instances
@@ -221,10 +255,15 @@ A virtual network card
 * https://aws.amazon.com/blogs/aws/new-elastic-network-interfaces-in-the-virtual-private-cloud/
 
 ## EC2 Hibernate
-* RAM is preserved; RAM state is written to a file in root EBS volume
-* boot is faster as OS is not stopped/restarted
-* ie: root EBS must be envrypted and have enough space to contain the RAM state
-* does not support instance store?
-* long-running processes that should never be stopped
-* speed up boot time
-* cannot be hibernated for more than 60 days
+
+Hibernation stops your instance and saves the contents of the instance’s RAM to the EBS root volume.
+- can be enabled (ONLY during launch) by setting `Stop - Hibernation Behavior` to `hibernate` 
+- gives you **faster boot times** 
+- you are charged only for EBS storage
+- you are NOT charged for the instance while it is stopped (hibernated)
+- Pre-requisistes/limitations:
+    - you cannot enable hibernation on an existing instance
+    - instance RAM size must be less than 150GiB (Linux) and less than 16GiB (Windows)
+    - root volume type has to be an EBS volume; does not support instance store
+    - root volume MUST be encrypted.
+    -  cannot be hibernated for more than 60 days

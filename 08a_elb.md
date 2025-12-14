@@ -89,18 +89,13 @@ ELBs support TLS termination
 x509 certificates can be managed by ACM (AWS Certificate Manager)
 * multi-domain support and SNI for multiple certs?
 * can support legacy clients (older SSL/TLS versions)
-* SNI
-    * Server Name Indication
-    * clients need to indicate hostname of target server in the SSL handshake
-    * allows the loadbalancer to serve multiple TLS certificate
-    * ELB will return matching certificate(SNI) or default one
-    * supported by newer generation(v2) 
-        * Both ALB and NLB supports having multiple listeners with multiple certificates
-        * uses SNI to match certificates
-    * Not supported by CLB
-        * Supports only one certiciate
-        * Must use multiple CLBs for multiple hostnames with multiple certificates
-
+* Server Name Indication (SNI):
+  - allows ELB (listener) to serve multiple TLS certificates
+  - client indicates hostname of target server in the SSL handshake 
+  - if not match is found or if SNI is not supported, ELB returns default certificate
+  - supported by v2 generation (ALB, NLB)
+  - not supported by v1 generation (CLB)
+  
 ## Connection Draining/Deregisration Delay
 * Connection Draining (CLB)
 * Deregistration Delay (ALB, NLB)
