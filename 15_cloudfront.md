@@ -12,10 +12,10 @@ You create a `distribution` to tell where the content is delivered from. The dis
 
 ## Origins
 #### S3 Origin
-- for distributing files and caching them at the edge
-- for uploading files to S3 through Cloudfront (using Cloudfront signed URLs or signed cookies  )
-- secured using OAC - Origin Access Control (all requests via Cloudfront are signed and you setup bucket policies to trust these requests.)
-
+- for 'global' delivery of static content via S3.
+- securing content can be done at:
+    - user-level : using signed URLs/signed Cookies
+    - bucket-level: using Origin Access Control (OAC)
 #### VPC Origin
 - to deliver content from applications hosted in VPC private subnets
 - can deliver traffic to 
@@ -70,7 +70,7 @@ You can reduce the cost by reducing the number of edge locations:
     - full (\*)  
     - partial (/images/*)
 
-## Exam - AWS Cloudfront Signed URLs and Signed Cookies
+## EXAM - AWS Cloudfront Signed URLs and Signed Cookies
 Many companies want to restrict access to certain content to specific users (eg: Paid subsribers). To do this you could you can use Cloudfront Signed URLs or Signed Cookies.
 
 ### Signed URL vs Signed Cookie
@@ -81,14 +81,29 @@ Many companies want to restrict access to certain content to specific users (eg:
 |Mechanism|A generated signed URL is distributed to the user|Cookie with additional attributes
 |Best suited for| single file downloads, APIs, mobile clients that require access to a few resources|Web Apps that require to access multiple objects once authenticated
 
-** Note: RTMP (Adobe's Real-Time Messaging Protocol) - an older way used for streaming video/audio cannot use Cookies
+**Note**: 
+- RTMP (Adobe's Real-Time Messaging Protocol) is an older protocol used for streaming video/audio. RTMP cannot use Cookies.
+- If client cannot afford a change in their application to use Signed URLs, then Signed Cookies are a better option.
 
+## EXAM - Cloudfront Lambda@Edge
+Allows you to run lambda at AWS Cloudfront Edge locations.
+Lambda@Edge can be used to respond to 
+- **Viewer Request**: Before Cloudfront caches the content
+    - Authentication/Authorization
+    - URL Rewriting
+    - Bot Detection
+- **Origin Request**: Before Cloudfront forwards the request to the Origin
+    - Add/Modify request headers 
+    - Dynamic Origin Selection
+- **Origin Response**: After Cloudfront receives the response from the Origin
+    - Add/Modify response headers 
+    - Handle errors
+- **Viewer Response**: Before Cloudfront sends response to viewer
+    - Add Cookie
+    - Add Security Headers
 
-
-|Use Case|Single object access|Multiple object access|
-|URL Format|Long, complex URL with signature|Shorter URL with cookie|
-|Security|URL contains signature|Cookie contains signature|
-|Expiration|URL has expiration time|Cookie has expiration time|
+## EXAM - Cloudfront Field Level Encryption
+CloudFront Field-Level Encryption encrypts specific sensitive request fields at the edge so only authorized backends can decrypt them.
 
 ## AWS Global Accelerator
 - 2 global Anycast IP are created for your application
@@ -107,30 +122,20 @@ Many companies want to restrict access to certain content to specific users (eg:
     - only 2 external IPs needs to be whitelisted
     - DDoS protection thanks to AWS Shield
 
-## AWS Global Accelerator vs CloudFront
+## AWS Global Accelerator vs Cloudfront     
 
-Similarities:
-- both leverage Global Network and Edge Locations
+**Similarities**:
+- both leverage AWS Global Network and Edge Locations
 - both integrate with AWS Shield for DDoS protection
 
-Differences:
-|CloudFront|Global Accelerator|
+**Differences**:
+|Cloudfront|Global Accelerator|
 |---|---|
 |improves performance for both static content (images, videos) and dynamic content (API acceleration)|improves performance for wider range of applications over TCP/UDP|
 |best suited for Content Delivery|best suited for Application Delivery Optimization|
 |HTTP/HTTPS|non HTTP usecases like Gaming(UDP), IoT(MQTT), VoIP| 
 |Content is served from the Edge usually (Caching)|Proxies packets to the Application|
 |Dynamic IP|Static IP (for HTTP usecases) or for fast regional failover|
-
-
-
-
-
-
-
-
-
-
 
 
 
