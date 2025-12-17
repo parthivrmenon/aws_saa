@@ -11,6 +11,7 @@
 ## Fargate Launch Type
 - You don't need to provision or scale the infrastructure (Serverless)
 - ECS Tasks are run by AWS automatically
+- **Note:** Fargate Profiles can be created for EKS clusters too.
 
 ## IAM Roles
 

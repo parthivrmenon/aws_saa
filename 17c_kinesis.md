@@ -32,6 +32,9 @@ Kinesis automatically scales based on observed throughput in last 30d
 - auto-scale based on observed throughput in last 30d
 - $/stream/hour & data(in GB) in/out
 
+## Exam: KDS - Enhanced Fan-Out
+Normally, the OUT throughput is shared across consumers, but KDS let's you create dedicated thoughout for each Consumer using Enhanced Fan-Out.
+ 
 ## Partitioning
 
 

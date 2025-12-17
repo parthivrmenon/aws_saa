@@ -58,6 +58,7 @@ You can optionally select **enable storage autoscaling** which allows storage to
 - **Condition for scaling**: *If free storage is less than 10% of allocated storage for at least 5 minutes and 6 hours have passed since last storage modification*
 - **Maximum Storage Threshold**: Autoscaling will scale storage from the "Allocated Storage" upto this limit. 
 - **Best-suited for**: applications with unpredictable workloads
+- **Note:** RDS Storage Autoscaling can be enabled at anytime without any downtime.
 
 
 ## Features
@@ -138,6 +139,24 @@ for Microsoft SQL Server engine, use one of the below two options:
 
 - Force SSL for all connections using the **rds.force_ssl** option. This happens transparently to the client, and the client doesn't have to do any work to use SSL.
 - Encrypt specific connections — this sets up an SSL connection from a specific client computer, and you must do work on the client to encrypt connections.
+
+## EXAM - RDS Monitoring
+### Basic Monitoring
+These are enabled by default and are DB-instance–level metrics.
+    - CPU Utilization
+    - Database Connections
+    - Freeable Memory
+    - ReadIOPS/WriteIOPs
+    - ReadLatency/WriteLatency
+    - FreeStorageSpace
+### Enhanced Monitoring:
+Enhanced Monitoring provides real-time OS metrics (from the host, not the database engine). 
+Metrics are published to Cloudwatch Logs not Cloudwatch Metrics.
+    - RDS Child Processes: 
+    - RDS Processes
+    - OS Processes
+    - CPU, memory, file system, and network usage at the OS level
+
 
 
 

@@ -52,6 +52,60 @@ Short-lived, serverless compute functions that can be triggered on-demand.
     - easier to package runtime+dependecies compared to traditional lambda.
 
 
+# AWS API Gateway
+## Features:
+- Supports HTTP/WebSocket
+- handle API versioning
+- handle environments (prod, dev)
+- handle security (Authentication and Authorization)
+- create API Keys; handle request throttling
+- Swagger/OpenAPI import to define APIs faster
+- Transform and Validate requests/responses
+- Generate SDK and API spec
+- Caching of API responses
+
+## Integrations
+- Lambda Function: invoke lambda function as a response to API call
+- HTTP: backend can be on-prem or ALB
+- AWS Service: integrate with other AWS services directly via the service's API
+- DynamoDB
+
+## Endpoint Types
+- Edge-Optimized (default):
+    - for globally distributed clients; Public APIs.
+    - requests are routed automatically through Cloudfront Edge locations to a regional API Gateway
+    - url: https://{api-id}.execute-api.{region}.amazonaws.com
+      - default HTTPs
+      - AWS-managed certificate
+      - TLS termination at Cloudfront
+
+- Regional
+    - for clients within the same region;
+    - could manually combine with Cloudfront for more control over Cahing/WAF Rules.
+    - url: https://{api-id}.execute-api.{region}.amazonaws.com
+        - default HTTPs
+        - AWS-managed certificate
+        - TLS termination in the Region
+- Private
+    - can only be accessed via VPC using an interface VPC endpoint
+    - use a resource policy to define access
+    - url: https://{api-id}.execute-api.{region}.amazonaws.com
+        - default HTTPS
+        - AWS-managed certificate
+        - TLS termination in the Region
+
+## User Authentication
+- IAM Roles for internal applications
+- Cognito for external users using WebIdentity
+- Custom Authorizer 
+
+## EXAM - Custom Domain Name HTTPs Security
+- integrates with ACM
+- for edge-optimized endpoints certificate must be us-east-1 (as Cloudfront (Control Plane) will only use certificates from us-east-1)
+- for regional endpoint certificate must be in the same region as API Gateway
+- setup Alias or CNAME in Route 53 
+
+
 
 
 - DynamoDB
