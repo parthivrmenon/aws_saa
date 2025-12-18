@@ -79,7 +79,9 @@ It provides low-latency access to frequently used data by caching it locally whi
 
 ### Types of gateways
 - **File Gateway**: Provides **file-based** access to cloud storage via **SMB and NFS** protocols, suitable for applications requiring a file interface, such as some Microsoft SharePoint or SQL Server deployments. 
-- **Volume Gateway**: Provides block storage **iSCSI** volumes that can be used for applications like databases that require block storage interfaces. 
+- **Volume Gateway**: Provides block storage **iSCSI** volumes that can be used for applications like databases that require block storage interfaces. You can use Volume Gateway in two modes:
+    - Stored Mode: A full copy of the data is stored on-premises and  in the AWS cloud.
+    - Cached Mode: A full copy of the data is stored on AWS and recently used data is cached on-premises.
 - **Tape Gateway**: Offers a **virtual tape library (VTL)** for backup and archiving workloads, allowing you to replace physical tape with cloud storage for cost savings and durability. 
 - **FSx File Gateway**: Provides access to in-cloud Amazon FSx for Windows File Server shares from on-premises locations. 
 
