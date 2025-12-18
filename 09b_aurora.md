@@ -24,8 +24,7 @@ Features:
     - 4 copies out of 6 needed for writes
     - 3 copies out of 6 needed for reads
 
-## Advanced Concepts
-Replica Auto-Scaling
+## Aurora - Replica Auto-Scaling
 - auto replica scaling using CPU, Connection targets across heterogenous instances
 - Reader endpoint automatically extends to include new replicas
 

@@ -44,13 +44,9 @@ managed relational database using SQL as a query language
 
 - **Allocated storage:**
     * General Purpose: 20GiB to 65TiB
+        - IOPs is calculated based on allocates storage
     * Provisioned IOPs: 100GiB to 64TiB
-
-- **Provisioned IOPs**:
-    - only for io1/io2
-    - for gp2/gp3, it is automatically calculated based on storage size
-    - 1k - 256k IOPs
-
+        - You can explicity set IOPs 1k-256k
 
 
 # RDS - Storage Auto Scaling
@@ -152,6 +148,7 @@ These are enabled by default and are DB-instance–level metrics.
 ### Enhanced Monitoring:
 Enhanced Monitoring provides real-time OS metrics (from the host, not the database engine). 
 Metrics are published to Cloudwatch Logs not Cloudwatch Metrics.
+It is disabled by default, but can be enabled anytime.
     - RDS Child Processes: 
     - RDS Processes
     - OS Processes
