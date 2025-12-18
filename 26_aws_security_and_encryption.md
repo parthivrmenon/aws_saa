@@ -134,19 +134,29 @@ Older service for storing secrets.
     * API Gateway
 - Note: You cannot use ACM with EC2 instances directly.
 
-## AWS ACM - Requesting a Public Certificate
-- List domains (FQDN or wildcard) for which you want to request a certificate
-- Select validation method (DNS or Email)
+## AWS ACM - Provisioning - Requesting a Public Certificate
+1. Open ACM in the right region:
+    - For Cloudfront -> us-east-1
+    - For ALB/API Gateway -> same region as ALB/API Gateway
+2. List FQDNs for which you want an Amazon Trust Services (ATS) issued public certificate. (eg: acme.com, www.acme.com, *.acme.com etc)
+
+3. Validate domain ownership via:
     - Email validation sends an email to the contacts listed in WHOIS database.
-    - DNS validation requires you to add a CNAME record to your domain
+    - DNS validation requires you to add a CNAME record to your domain via Route53
+4. Certificate Issues:
 - After a few hours certificate is issued 
 - Certificate is setup for auto-renewal 60 days before expiry.
 
-## AWS ACM - Importing a Private Certificate
-- No auto-renewal
-- ACM will send daily reminders to the contacts listed in WHOIS 45 days before expiry. (can be configured)
-- Reminders are sent into AWS EventBridge
-- You can also use AWS Config to monitor certificate expiry using the rule acm-certificate-expiration-check.
+## AWS ACM – Importing a Private Certificate
+
+- **No automatic renewal** (you must replace the certificate before expiry)
+- ACM **does not manage the private key lifecycle**
+- **Expiration notifications** are sent:
+  - Starting **45 days before expiry**
+  - Via **Amazon EventBridge** (default)
+  - Optional **email notifications** can be configured
+- You can monitor certificate expiry using **AWS Config rule: `acm-certificate-expiration-check`**
+
 
 ## AWS ACM - Integrating with ALB
 - ALB can send HTTP-to-HTTPS redirect

@@ -155,7 +155,7 @@ Can be used to move large amounts of data:
 | Primary Purpose | Managed FTP/SFTP/FTPS access | Automated file data movement | Hybrid storage access |
 | Protocols | FTP, FTPS, SFTP | NFS, SMB | NFS, SMB, iSCSI |
 | Typical Source | External users / partners | NFS/SMB, S3, EFS, FSx | On-prem applications |
-| Typical Destination | S3, EFS | S3, EFS, FSx | S3, EBS |
+| Typical Destination | S3, EFS | **S3 (including Glacier)**, EFS, FSx | S3, EBS |
 | Block Storage Support | No | No | Yes (iSCSI) |
 | Real-Time Access | No | No | Yes |
 | Agent Required | No | Yes | Yes |

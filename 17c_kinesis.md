@@ -38,3 +38,21 @@ Normally, the OUT throughput is shared across consumers, but KDS let's you creat
 ## Partitioning
 
 
+
+## EXAM - Kinesis Data Streams vs Kinesis Data Firehose
+
+| Distinction | Kinesis Data Streams | Kinesis Data Firehose |
+|------------|----------------------|-----------------------|
+| Purpose | Real-time stream processing | Near-real-time data delivery |
+| Data Sources | Any custom producer (apps, agents, IoT, logs) | Direct PUT, Kinesis Data Streams, CloudWatch Logs, AWS IoT|
+| Data Destinations | Any (via custom processing) like Lambda or KCL Apps | S3, Redshift, OpenSearch, Splunk |
+| Processing | You process data yourself | Optional transformation via Lambda |
+| Data Retention | **24 hours (default), up to 7 days** | No retention (buffers then delivers) |
+| Replay Capability | Yes | No |
+| Ordering Guarantee | Per shard | No guarantee |
+| Scaling | Manual (shards) or enhanced fan-out | Automatic |
+| Latency | Milliseconds | Seconds to minutes |
+| Exam Trigger Words | Real-time, replay, ordered | Load, deliver, fully managed |
+
+
+

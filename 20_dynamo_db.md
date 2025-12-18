@@ -22,18 +22,19 @@ By default data is replicated across `3 Availability Zones` and provides `99.99%
 Dynamo DB charges for reading, writing and storing data along with any optional features you enable.
 It has two capacity modes:
 - `OnDemand`: DynamoDB scales to meet read/write throughput. You pay as per usage.
-- `Provisioned`: 
-    - Auto-Scaling ON:
-        - Set Min/Max Read-Capacity Units and Write-Capacity Units
-        - Set target utilization (e.g., 70%)
+- `Provisioned` + `Autoscaling`:
+    - default when created via Console but not when using CLI/API) 
+    - Set Min/Max Read-Capacity Units and Write-Capacity Units
+    - Set target utilization (e.g., 70%)
+    - Auto-scaling adjusts capacity based on traffic patterns to maintain performance and cost efficiency.
+- `Provisioned` (No Auto-scaling):
+    - You set Provisioned Read/Write Capacity Units manually.
+    - You are charged for the RCU/WCU regardless of usage.
 
-        - Auto-scaling adjusts capacity based on traffic patterns to maintain performance and cost efficiency.
-    - Auto-scaling OFF:
-        - You set Provisioned Read/Write Capacity Units manually
+**Notes:** 
+- Auto-scaling is selected by default when creating a DynamoDB table via the console, but if you are creating the table via CLI/Terraform you have to enable it explicitly.
 
-*Note:* Auto-scaling is selected by default when creating a DynamoDB table via the console, but if you are creating the table via CLI/Terraform you have to enable it explicitly.
-
-*Note:* `Warm throughput` is DynamoDB’s instantly available read/write capacity—based on recent traffic or manual pre-warming (additional charge) that lets tables absorb sudden spikes without waiting for scaling.
+- `Warm throughput` is DynamoDB’s instantly available read/write capacity—based on recent traffic or manual pre-warming (additional charge) that lets tables absorb sudden spikes without waiting for scaling.
 
 ## Global tables
 provides `multi-actve` , `multi-region` replication with `99.999%` availability.

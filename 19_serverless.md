@@ -105,8 +105,61 @@ Short-lived, serverless compute functions that can be triggered on-demand.
 - for regional endpoint certificate must be in the same region as API Gateway
 - setup Alias or CNAME in Route 53 
 
+# AWS Step Functions
+
+A visual, serverless workflow service to orchestrate AWS services (commonly Lambda).
+
+Features:
+- Integrates with AWS services such as Lambda, ECS, EC2, API Gateway, SQS, SNS, DynamoDB
+- Can implement **human approval workflows** using **wait states + callbacks** (task tokens)
+- Supports **sequence, parallel execution, retries, timeouts, error handling, and branching**
+- Manages **state and execution history automatically**
 
 
+
+## Amazon SWF vs AWS Step Functions (Exam-Focused)
+
+| Distinction | Amazon SWF | AWS Step Functions |
+|------------|-----------|-------------------|
+| Purpose | Coordinate long-running, stateful workflows | Serverless orchestration of AWS services |
+| Execution Model | **Worker polling (pull model)** | **Service invocation (push model)** |
+| Task Runners | External workers (EC2, containers, **on-prem**) | AWS-managed services (Lambda, ECS, SDK calls) |
+| On-Prem Support | **Native and firewall-friendly** | Indirect (API Gateway, SQS, callbacks) |
+| State Management | Manual via SWF APIs | Automatic |
+| Workflow Duration | Minutes to **months** | Seconds to days (Standard) |
+| Human Approval | Native | Via wait states + callbacks |
+| Serverless | No | **Yes** |
+| Complexity | Higher (you manage workers) | Lower (managed) |
+| Exam Preference | Legacy / niche | **Default choice** |
+| Exam Triggers | On-prem workers, long-running, polling | Serverless orchestration, Lambda workflows |
+
+
+
+# Amazon Cognito
+
+Identity service for **web and mobile application users**.
+
+## Cognito User Pools (CUP)
+- **User directory** for app users (sign-up, sign-in, MFA, password policies)
+- Issues **JWT tokens** after authentication
+- Integrates with:
+  - **API Gateway** (Cognito authorizer)
+  - **Application Load Balancer (ALB)** (OIDC authentication)
+- Used for **authentication**
+
+## Cognito Identity Pools
+- Provide **temporary AWS credentials** (via STS) to authenticated or guest users
+- Allow users to access **AWS services directly** (e.g., S3, DynamoDB)
+- Can federate identities from:
+  - **Cognito User Pools**
+  - Social IdPs (Google, Facebook, Apple)
+  - SAML / OIDC providers
+- Used for **authorization to AWS resources**
+
+
+
+
+# Others
 
 - DynamoDB
 - AWS Cognito
