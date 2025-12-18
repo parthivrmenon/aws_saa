@@ -21,12 +21,25 @@ flexible IPs
 scalable 2-way Marketing communications service
 SMS/Email Marketing Campaigns
 
-# SSM Session Manager
+# Amazon Systems Manager(SSM) - Session Manager
 secure shell access to EC2 instances/On-premises servers without SSH, Bastion Hosts
 uses SSM agent.
 
+# Amazon Systems Manager(SSM) - Run Command
+Execute a document/script across multiple instanaces.(without SSH)
+
+# Amazon Systems Manager(SSM) - Patch Manager
+Automate the patching process of instances
+Supports Ec2 as well as on-prem VMs.
+Linux/MacOs/Windows
+On-demand or scheduled
+Scan and generate patch compliance reports.
+
+
 # AWS Instance Scheduler
 automatically start/stop EC2 instances based on schedule
+
+
 
 # AWS Workdocs
 AWS WorkDocs is a fully managed, secure enterprise document storage and collaboration service for creating, sharing, and commenting on files.

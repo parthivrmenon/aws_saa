@@ -1,6 +1,6 @@
 # Amazon EC2
 
-**Elastic Cloud Compute** let's you launch a Linux/Win/Mac based virtual machine(s). 
+**Elastic Cloud Compute** lets you launch Linux/Windows/Mac based virtual machine(s). 
 
 
 ## Sizing & Configuration
@@ -19,16 +19,16 @@
     * install updates/softwares
     * runs with root user (sudo)
 
-# EC2 -  Instance Type
-* Instance Names -> m5.2xlarge
+# EC2 - Instance Types
+* Instance Naming Convention: `m5.2xlarge`
     * m: instance class
     * 5: generation
     * 2xlarge: size within instance class
-* General Purpose (t' and m')
-* Compute Optimized (c')
-* Memory Optimized (r')
-* Storage Optimized (d')
-* Accelerated Computing (p-type and g-type)
+* **General Purpose** (t and m series)
+* **Compute Optimized** (c series)
+* **Memory Optimized** (r series)
+* **Storage Optimized** (d and i series)
+* **Accelerated Computing** (p, g, and f series)
 
 # EC2 - Lifecycle States & Billing
 <table border="1">
@@ -86,18 +86,19 @@
 * 22 = SFTP (Secure FTP)
 * 80,443 = HTTP/HTTPs
 
-# EC2 -  Purchase Options
-|Purcahse Option|Cost|Commitment|Upfront Payment|Recommended For|Limits|Other Notes|
+# EC2 - Purchase Options
+| Purchase Option | Cost | Commitment | Upfront Payment | Recommended For | Limits | Other Notes |
 |---|---|---|---|---|---|---|
-On-Demand|Highest cost; pay-per-use|No|No|Short un-interrupted workloads where app behavior cannot be predicted|vCPU limit per region per instance type|-|
-Reserved Instances|upto 72% discount; reserved|Yes (1-3 years)|Yes/Partial|Steady-state long running usage patterns like a database|20 per region|Convertible Reserved Instances (can change type, instance family, OS, scope etc) but you get less discount than Reserved.|
-Savings Plans|upto 72% discount; reserved + pay-per-use|Yes (1-3 years)|Yes/Partial|Steady-state long running workloads that don't need capacity reservation and requires flexibility within an instance family|None|locked in to a specific instance family but can change size, OS and tenancy|
-Spot Instances|upto 90% discount|No|No|Fault-tolerant workloads|Dynamic Spot limit per region|-|
+| On-Demand | Highest cost; pay-per-use | No | No | Short, uninterrupted workloads where app behavior cannot be predicted | vCPU limit per region per instance type | - |
+| Reserved Instances | Up to 72% discount; reserved | Yes (1-3 years) | Yes/Partial | Steady-state long running usage patterns like a database | 20 per region | Convertible Reserved Instances (can change type, instance family, OS, scope etc) but you get less discount than Reserved. |
+| Savings Plans | Up to 72% discount; reserved + pay-per-use | Yes (1-3 years) | Yes/Partial | Steady-state long-running workloads that don't need capacity reservation and require flexibility within an instance family | None | Locked into a specific instance family but can change size, OS, and tenancy |
+| Spot Instances | Up to 90% discount | No | No | Fault-tolerant workloads | Dynamic Spot limit per region | - |
 
-### On-Demand instances
-Pay for what you use. 
+### On-Demand Instances
 
-For `Linux/Windows` instances you are `billed per second`, after the first minute.
+Pay for what you use.
+
+- For `Linux/Windows` instances, you are `billed per second`, after the first minute.
 For other OS's you are `billed per hour`.
 
 * has the `highest cost` but `no upfront payment` or `long-term commitment`
@@ -131,10 +132,11 @@ Example: `commit to $10/hr for 1 or 3 years`.
 
 Usage beyond the plan is billed at On-Demand price.
 
-You are locked to a specific `instance family`, but you can change the size, OS and tenancy.
+- You are locked to a specific `instance family`, but you can change the size, OS, and tenancy.
 
-### Spot Instances 
-You can `bid for unused capacity`.
+### Spot Instances
+
+- You can `bid for unused capacity`.
 
 You can get `up to 90% discount` on On-Demand price. These are the most cost-efficient.
 
@@ -250,10 +252,10 @@ A virtual network card
 * instance-agnostic: can be detached and attached to different instances
 * useful for fast failovers within an AZ
 * An ENI can have:
-    * 1 Primary private IPv4 address (Mandatory)
-    * 1 or more secondary IPv4 addresses (Optional)
-    * 1 EIP (IPv4) tied to the primary private IPv4 address (optional)
-    * One or more Security Groups
+    * 1 Primary private IPv4 address (mandatory)
+* 1 or more secondary IPv4 addresses (optional)
+* 1 Elastic IP (IPv4) tied to the primary private IPv4 address (optional)
+* One or more Security Groups
     * a MAC address
 * bound to a specific AZ
 * https://aws.amazon.com/blogs/aws/new-elastic-network-interfaces-in-the-virtual-private-cloud/
