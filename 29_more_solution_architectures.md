@@ -13,28 +13,28 @@
 - **Elastic Fabric Adapter (EFA)**
     - built on top of ENA to support HPC, MPI, or tightly coupled workloads
     - ONLY works for **Linux**
-    - upto 25Gbps
+    - Ultra-low latency
 - **Intel 82599 Virtual Function (VF)**
     - legacy
     - upto 10Gbps
     - only C3, M3, R3, etc. (legacy instances)
         
 ## Storage
-Instance attached 
-- Instance Store Volumes for 1M IOPS but ephemeral
-- EBS (io2 Block Express) for 256k IOPS
+**Instance attached storage**
+- Instance Store Volumes: 1M IOPS but ephemeral
+- EBS (io2 Block Express) : upto 256k IOPS
 
-Network
-- Amazon S3
+**Network attached storage**   
 - EFS (FSx for Lustre)
 
 ## Automation and Orchestration
-- AWS Batch
-    - run single batch jobs that automatically span across multiple EC2 instances
-- AWS ParallelCluster
-    - open-source cluster management tool to deploy HPC on AWS
-    - configured with text files
-    - can enable EFA to improve performance
+**AWS Batch**
+- run single batch jobs that automatically span across multiple EC2 instances
+
+**AWS ParallelCluster**
+- open-source cluster management tool to deploy HPC on AWS
+- configured with text files
+- can enable EFA to improve performance
 
 
 
