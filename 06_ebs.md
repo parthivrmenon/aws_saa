@@ -63,16 +63,16 @@ backups and replication is recommended
 ## EBS Volume Types
 | Volume Type | Generation | Best Use Case | Size | Throughput |
 |-------------|------------|---------------|------|------------|
-| General Purpose SSD | gp2          | Balanced performance and cost | 1GiB - 16TiB | 3 IOPS per GiB; burstable upto 3000 IOPs; Max 16000 IOPs for larger volumes |
-| General Purpose SSD | gp3          | Balanced performance and cost | 1GiB - 64TiB | 3000 IOPS fixed baseline, Max 16000 IOPS |
+| General Purpose SSD | gp2          | Balanced performance and cost | 1GiB - 16TiB | 3 IOPs per GiB, burstable upto 3000 IOPs (Min:100 IOPs; Max:16000)|
+| General Purpose SSD | gp3          | Balanced performance and cost | 1GiB - 64TiB | 3000 IOPS fixed baseline; can provision up to Max 16000 IOPS |
 | Provisioned IOPS SSD | io1          | High-performance mission-critical applications | 4GiB - 16TiB | Max 64,000 IOPS depending on volume (50:1) |
-| Provisioned IOPS SSD | io2          | Highest-performance mission-critical applications | 4GiB - 16TiB | Max 64,000 IOPS depending on volume (500:1) |
+| Provisioned IOPS SSD | io2          | Highest-performance mission-critical applications | 4GiB - 16TiB | Max 64,000 IOPS depending on volume (50:1) |
 | Throughput Optimized HDD | st1          | Low-cost throughput-intensive workloads | 125GiB - 16TiB | 40MiB/s per TiB |
 | Cold HDD | sc1          | Infrequent access workloads | 125GiB - 16TiB | 12MiB/s per TiB |
 
-
-EBS volumes are characterized by Size|Throughput|IOPS
-Only gp2/gp3 and io1/io2 can be used as boot volume
+**Notes:**:
+- Only gp2/gp3 and io1/io2 can be used as boot volume
+- io2 Block Express volumes can achieve 500:1 IOPs to GiB ratio and max upto 256k IOPs.
 
 Single root I/O virtualization (SR-IOV) enables higher I/O performance for EBS volumes.
 
