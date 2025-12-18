@@ -28,3 +28,6 @@ uses SSM agent.
 # AWS Instance Scheduler
 automatically start/stop EC2 instances based on schedule
 
+# AWS Workdocs
+AWS WorkDocs is a fully managed, secure enterprise document storage and collaboration service for creating, sharing, and commenting on files.
+

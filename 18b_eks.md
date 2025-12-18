@@ -30,4 +30,14 @@ Supports:
 - EBS, FSx for Lustre, Fsx for NetApp ONTAP
 - EFS (Fargate)
 
+## EXAM - Envelope Encryption for Secrets in EKS
+
+- In Amazon EKS, the **control plane (including etcd) is AWS-managed**.
+- **By default, etcd is not encrypted at rest**, so Kubernetes Secrets are stored in plaintext.
+- To encrypt secrets, you must enable **envelope encryption** using **AWS KMS**:
+  - In the **EKS console**, enable **Secrets Encryption** during cluster creation.
+  - Or, using **eksctl**, provide an **--encryption-config** file specifying the KMS key.
+- Only **Secrets** are encrypted with envelope encryption; other Kubernetes objects (ConfigMaps, Pods, etc.) remain unencrypted in etcd.
+
+
 

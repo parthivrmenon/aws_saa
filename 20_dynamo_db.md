@@ -62,8 +62,8 @@ has server-side support for `ACID` transactions.
 ## Change Data Capture 
 * supports item-level CDC records in near real-time.
 * It offers two streaming models for CDC:
-    * DynamoDB Streams
-    * Kinesis Data Streams for Dynamo DB
+    * DynamoDB Streams and Lambda
+    * Kinesis Data Streams for Dynamo DB using Kinesis Adapter.
 
 ## Secondary Indexes
 - if you want to query a table using a non primary (Partition Key + Optional SortKey) index, you can define a secondary indxex.

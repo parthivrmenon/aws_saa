@@ -114,16 +114,12 @@ Audit Logging:
 - can be enabled and sent to Cloudwatch Logs for longer retention
 
 
-## RDS Proxy
-managed database proxy for RDS
-- allow apps to pool and share DB connection
-- reduces stress on resources (CPU, RAM) and minimize open-connections and timeouts
-- serverless, autoscaling, HA (multi-AZ)
-- reduce failover time by 66%
-- supports RDS(MySQL, PostgresSQL, MAriaDB, MSSQL ) and Aurora (mySQL, PostgresSQL)
-- no code changes required for most apps (simply change endpoint it connects to)
-- enforce IAM authentication for DB and securely store creds in AWS Secrets Manager
-- RDS Proxy is never publically accessible (must be access from VPC)
+## EXAM - Aurora MySQL Change Data Capture (CDC) with Lambda
+Aurora MySQL provides built-in functions to invoke Lambda:
+- mysql.lambda_async()
+- mysql.lambda_sync()
+
+This approach can be useful For example, you might want to capture data changes whenever a row in a table is modified in your database.
 
 
  

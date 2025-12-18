@@ -105,3 +105,13 @@ Example: Granting access to an S3 bucket in Account B for a User in Account A
   - Identify untagged resources
   - Detect if MFA is not enabled for IAM users
   - Check if S3 buckets are publicly accessible
+
+
+## AWS Resource Access Manager
+- easily and securely  share AWS resources across accounts under your AWS Organizations
+- centrally manage resources you own across your estate
+- you can share:
+    - transit gateways
+    - subnets
+    - AWS License Manager configurations
+    - Amazon Route53 Resolver rules

@@ -23,19 +23,18 @@ Launch 3rd party high-performance filesystems on AWS
     - data is replicated within same AZ
     - replace failed files within minutes
     - used for long-term processing , sensitive data
-### FSx for Windows File Server
-- Supports SMB protocol, Win NTFS
-- AD integration, ACLs, user quotas
-- can be mounted on Linux EC2 instances
-- supports MS DFS Namespaces (group files across multiple FS)
-- Scale up to 10s of GB/s, millions of IOPS, 100s PB of data
-- Storage options
-    - SSD - databases, media processing, data analytics
-    - HDD - home dir, CMS
-- can be accessed from your on-premises infrastructure (VPN or Direct Connect)
-- can be configured to be Multi-AZ
-- data is backed up to S3
-    - FSx for OpenZFS
+
+## FSx Variants — Key Distinctions Only (SAA-Focused)
+
+| Distinction | FSx for Windows File Server | FSx for NetApp ONTAP | FSx for OpenZFS |
+|------------|-----------------------------|---------------------|----------------|
+| Primary OS | **Windows only** | **Windows + Linux** | **Linux only** |
+| Protocols | **SMB** | **SMB, NFS, iSCSI** | **NFS** |
+| Multi-protocol | - | Yes| - |
+| Active Directory | **Native** | **Supported** | - |
+| High Availability | **Multi-AZ** | **Multi-AZ** | - |
+| Latency Focus | Standard | Standard | **Ultra-low** |
+
 
 ### FSx for Lustre
 - Lustre (Linux cluster) is a type of parallel distribution FS
@@ -51,12 +50,13 @@ Launch 3rd party high-performance filesystems on AWS
 - can be used on-prem servers (VPN or Direct Connect)
 
 ### FSx for NetApp ONTAP
-- compatible with NFS, SMB, iSCSI protocol
+- compatible with multiple protocols
+  - NFS (linux/unix)
+  - SMB (windows)
+  - iSCSI (block storage)
 - move workloads running on ONTAP or NAS to AWS
 - works on: Linux, Win, MacOS, VMware Cloud on AWS, Amazon Workspace & AppStream 2.0, EC2, ECS, EKS
-- storage shrinks or grows automatically
-- snapshots, replication, low-cost, compression and data de-duplication
-- point-in-time instantaneous cloning (helpful for testing new workloads)
+
 
 ### FSx for OpenZFS
 - compatible with NFS (v3, v4, v4.1, v4.2)
@@ -65,6 +65,8 @@ Launch 3rd party high-performance filesystems on AWS
 - upto 1,0000,0000 IOPS with < 0.5 ms latency
 - snapshots, compression and low-cost
 - point-in-time instantaneous cloning (helpful for testing new workloads)
+
+
 
 ## AWS Storage Gateway
 is a hybrid cloud storage service that connects on-premises environments with Amazon Web Services (AWS) cloud storage. 
@@ -119,8 +121,10 @@ A Virtual Tape Library (VTL) backed by S3 and Glacier
 - has the required CPU, memory, network, SSD cache resources
 - helpful for daily NFS backups in small data centers
 
-## AWS Transfer Family
-fully managed service for file transfers in and out of AWS services like S3/EFS using traditional file transfer protocols like FTP, FTPS, SFTP
+## AWS Transfer
+fully managed **file-transfer** service for file transfers in and out of AWS services like S3/EFS using traditional file transfer protocols like FTP, FTPS, SFTP
+- Protocol: **FTP, FTPS, SFTP**
+- Destination: **S3, EFS**
 - you expose and endpoints that partners can use to upload/download files to to/from S3/EFS.
 - pay-per `endpoint/hour/GB`
 - store and manage user credentials within the service
@@ -143,3 +147,17 @@ Can be used to move large amounts of data:
 - Alternate : AWS Snowcone (has agent pre-installed) can be used if network bandwidth is limited.
 
 - **Note:** DataSync can directly write to S3 Glacier tiers. 
+
+## AWS File Transfer Services — Comparison
+
+| Distinction | AWS Transfer Family | AWS DataSync | AWS Storage Gateway |
+|------------|---------------------|--------------|---------------------|
+| Primary Purpose | Managed FTP/SFTP/FTPS access | Automated file data movement | Hybrid storage access |
+| Protocols | FTP, FTPS, SFTP | NFS, SMB | NFS, SMB, iSCSI |
+| Typical Source | External users / partners | NFS/SMB, S3, EFS, FSx | On-prem applications |
+| Typical Destination | S3, EFS | S3, EFS, FSx | S3, EBS |
+| Block Storage Support | No | No | Yes (iSCSI) |
+| Real-Time Access | No | No | Yes |
+| Agent Required | No | Yes | Yes |
+| Exam Trigger Words | SFTP, partners | Migrate, sync, bulk | Hybrid, on-prem apps |
+

@@ -118,6 +118,16 @@ You can opt for manual DB snapshots if:
 - you want to retain backups for longer periods.
 - for infrequently used RDS (restore from snapshot rather than turning it off as you would still need to pay for storage even for a stopped RDS instance)
 
+## RDS Proxy
+managed database proxy for RDS
+- allow apps to pool and share DB connection
+- reduces stress on resources (CPU, RAM) and minimize open-connections and timeouts
+- serverless, autoscaling, HA (multi-AZ)
+- reduce failover time by 66%
+- supports RDS(MySQL, PostgresSQL, MAriaDB, MSSQL ) and Aurora (mySQL, PostgresSQL)
+- no code changes required for most apps (simply change endpoint it connects to)
+- enforce IAM authentication for DB and securely store creds in AWS Secrets Manager
+- RDS Proxy is never publically accessible (must be access from VPC)
 
 # RDS - Database Authentication
 ### Password Authentication:
@@ -153,6 +163,8 @@ It is disabled by default, but can be enabled anytime.
     - RDS Processes
     - OS Processes
     - CPU, memory, file system, and network usage at the OS level
+
+
 
 
 

@@ -169,14 +169,17 @@ Older service for storing secrets.
     - CloudFront
     - AppSync Graphql API
     - Cognito User Pools
+## WAF Rule Types, Groups
+- Regular rule – Matches request content (headers, URI, query string, body) to allow/block traffic
+- Rate-based rule – Limits requests from the same IP over time to stop floods or abuse
+- Managed rule – Prebuilt rule sets (AWS or vendors) for common web exploits (SQLi, XSS, bots)
+- Rule group – Logical collection of rules reused across multiple Web ACLs
+- Default action – Fallback allow/block behavior when no WAF rule matches
 
-- define Web ACLs on:
-    - IP Set: upto 10k IP addresses per rule
-    - HTTP Headers or Body, URI Strings for common attacks like SQL Injection, XSS, etc.
-    - size constraints
-    - geo-match (block specific countries)
-    - rate-based rules for DDoS protection
-- web ACLS are regional except for CloudFront
+**Notes**: 
+- AWS WAF supports geo location rules (regular, rate-based) that allow or block HTTP requests based on the request’s country of origin
+- IP Set: upto 10k IP addresses per rule
+- Web ACLs are regional except for CloudFront
 
 ## WAF - Fixed IP for ALB
 - you can use a Globla Accelerator for fixed IP and then use WAF to protect the ALB
@@ -241,7 +244,13 @@ Older service for storing secrets.
 - analyze data in S3
 - sends notifications to AWS EventBridge
 
-
+# AWS Artefact
+AWS Artifact is a self-service portal that provides access to AWS compliance reports and agreements across various regulatory standards
+- SOC 1/2/3
+- ISO 27001, 27017, 27018
+- PCI DSS
+- HIPAA / HITECH
+- FedRAMP
 
 
 
