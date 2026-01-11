@@ -1,84 +1,65 @@
-# AWS Solutions Architect Associate
+# AWS Solutions Architect Associate (SAA-C03) Study Notes
+
+Study notes for the AWS Solutions Architect Associate certification exam. These notes are best paired with loads of practice tests and revisions.
 
 ## Contents
 
 ### Getting Started
-- [Getting Started](./getting_started.md)
-- [General Information](./general_information.md)
-- [Regions and AZs](./regions_and_azs.md)
-- [AWS CLI Setup on Windows](./aws_cli_setup_on_win.md)
+- [01. General Information](./01_general_information.md) - Exam details and study tips
+- [02. Setting up the AWS CLI](./02_setting_up_the_aws_cli.md) - CLI installation and configuration
+- [03. Regions and Availability Zones](./03_regions_and_azs.md) - AWS global infrastructure
 
 ### Identity and Access Management
-- [IAM Basics](./04_iam.md)
-- [Advanced IAM](./25_iam_advanced.md)
+- [04. IAM Basics](./04_iam.md) - Users, groups, policies, and permissions
+- [21. Advanced IAM](./21_iam_advanced.md) - Organizations, SSO, and advanced concepts
 
 ### Compute Services
-- [EC2 Fundamentals](./05_ec2_fundamentals.md)
-- [Elastic Block Store (EBS)](./06_ebs.md)
-- [Elastic File System (EFS)](./05_efs.md)
-- [Elastic Load Balancing (ELB)](./08a_elb.md)
-- [Auto Scaling Groups (ASG)](./08b_asg.md)
-- [Elastic Beanstalk](./elastic_beanstalk.md)
-- [Amazon Machine Images (AMI)](./ami.md)
-- [App Runner](./app_runner.md)
-- [Elastic Container Service (ECS)](./18a_ecs.md)
-- [Elastic Kubernetes Service (EKS)](./18b_eks.md)
-- [Serverless](./19_serverless.md)
+- [05. Amazon EC2](./05_ec2.md) - Virtual machines, instance types, and AMIs
+- [06. Elastic File System (EFS)](./06_efs.md) - Managed NFS file system
+- [07. Elastic Block Store (EBS)](./07_ebs.md) - Block storage for EC2
+- [08a. Elastic Load Balancing (ELB)](./08a_elb.md) - Load balancers
+- [08b. Auto Scaling Groups (ASG)](./08b_asg.md) - Automatic scaling
+- [15a. Elastic Container Service (ECS)](./15a_ecs.md) - Container orchestration
+- [15b. Elastic Kubernetes Service (EKS)](./15b_eks.md) - Managed Kubernetes
+- [16. Serverless Computing](./16_serverless.md) - Lambda and serverless architectures
 
 ### Storage Services
-- [Amazon S3](./12_s3.md)
-- [CloudFront & CDN](./15_cloudfront.md)
-- [Additional Storage Options](./16_storage_extras.md)
+- [11. Amazon S3](./11_s3.md) - Object storage service
+- [12. CloudFront](./12_cloudfront.md) - Content delivery network
+- [13. Storage Extras](./13_storage_extras.md) - Additional storage options
 
 ### Database Services
-- [Amazon RDS](./09a_rds.md)
-- [Amazon Aurora](./09b_aurora.md)
-- [ElastiCache](./09c_elasticache.md)
-- [DynamoDB](./20_dynamo_db.md)
-- [Databases in AWS](./21_databases_in_aws.md)
+- [09a. Amazon RDS](./09a_rds.md) - Relational database service
+- [09b. Amazon Aurora](./09b_aurora.md) - High-performance relational database
+- [09c. ElastiCache](./09c_elasticache.md) - In-memory caching
+- [17. DynamoDB](./17_dynamo_db.md) - NoSQL database service
 
 ### Networking & Content Delivery
-- [Route 53](./10_route_53.md)
-- [Networking & VPC](./27_networking_and_vpc.md)
+- [10. Route 53](./10_route_53.md) - DNS and domain registration
+- [23. Networking & VPC](./23_networking_and_vpc.md) - Virtual private clouds and networking
 
 ### Messaging & Integration
-- [Simple Queue Service (SQS)](./17a_sqs.md)
-- [Simple Notification Service (SNS)](./17b_sns.md)
-- [Amazon Kinesis](./17c_kinesis.md)
-- [Kinesis Firehose](./17d_firehose.md)
-- [Amazon MQ](./17e_amazon_mq.md)
+- [14a. Simple Queue Service (SQS)](./14a_sqs.md) - Message queuing
+- [14b. Simple Notification Service (SNS)](./14b_sns.md) - Pub/sub messaging
+- [14c. Amazon Kinesis](./14c_kinesis.md) - Real-time data streaming
+- [14d. Kinesis Data Firehose](./14d_firehose.md) - Data delivery service
+- [14e. Amazon MQ](./14e_amazon_mq.md) - Managed message broker
+
+### Analytics & Machine Learning
+- [18. Data Analytics](./18_data_analytics.md) - Big data and analytics services
+- [19. Machine Learning](./19_machine_learning.md) - AI/ML services overview
 
 ### Security & Compliance
-- [AWS Security & Encryption](./26_aws_security_and_encryption.md)
-- [Monitoring & Auditing](./24_aws_monitoring_and_audit.md)
+- [22. AWS Security & Encryption](./22_aws_security_and_encryption.md) - Security services and best practices
+- [20. Monitoring & Auditing](./20_aws_monitoring_and_audit.md) - CloudWatch, CloudTrail, and monitoring
 
 ### Advanced Topics
-- [Application to Container Migration](./22_app_2_container.md)
-- [Data Analytics](./22_data_alaytics.md)
-- [Machine Learning](./23_machine_learning.md)
-- [Disaster Recovery & Migrations](./28_disaster_recovery_and_migrations.md)
-- [Solution Architectures](./29_more_solution_architectures.md)
-- [Other AWS Services](./30_other_services.md)
-- [Whitepapers & Reference Architectures](./31_whitepapers_and_architectures.md)
-- [Databases in AWS](./21_databases_in_aws.md)
+- [24. Disaster Recovery & Migrations](./24_disaster_recovery_and_migrations.md) - DR strategies and migration tools
+- [25. Solution Architectures](./25_more_solution_architectures.md) - Common architectural patterns
+- [26. Other AWS Services](./26_other_services.md) - Additional services for the exam
+- [27. Whitepapers & Architectures](./27_whitepapers_and_architectures.md) - Well-Architected Framework and best practices
 
-### Networking
-- [Route 53](./10_route_53.md)
-- [VPC](./vpc.md)
-- [Networking and VPC](./27_networking_and_vpc.md)
 
-### Messaging and Streaming
-- [SQS](./17a_sqs.md)
-- [SNS](./17b_sns.md)
-- [Kinesis](./17c_kinesis.md)
-- [Firehose](./17d_firehose.md)
-- [Amazon MQ](./17e_amazon_mq.md)
+## 📄 License
 
-### Application and Container Services
-- [App to Container](./22_app_2_container.md)
-
-### Analytics and Machine Learning
-- [Data Analytics](./22_data_alaytics.md)
-
-### Monitoring, Security, and Compliance
-- [AWS Security and Encryption](./26_aws_security_and_encryption.md)
+This work is licensed under the Creative Commons Attribution 4.0 International License.

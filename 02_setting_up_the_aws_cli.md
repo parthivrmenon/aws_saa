@@ -1,5 +1,5 @@
-# Getting started
-## Install the AWS CLI
+# Setting up the AWS CLI
+## Install the AWS CLI on Linux/Mac
 ```bash
 # install AWS CLI from source
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -10,27 +10,43 @@ sudo ./aws/install
 rm awscliv2.zip
 ```
 
+Confirm installation:
+```bash
+aws --version
+```
+
+## Install the AWS CLI on Windows
+Download and Install the [AWS CLI MSI Installer](https://awscli.amazonaws.com/AWSCLIV2.msi)
+
+Confirm installation:
+```powershell
+aws --version
+```
+
 ## Configure auto-prompt
+### Linux/Mac
 ```bash
 export AWS_CLI_AUTO_PROMPT="on-partial"
 ```
 
+### Windows
+```powershell
+$Env:AWS_CLI_AUTO_PROMPT="on-partial"
+```
 
 ## Setup AWS Credentials
+### Linux/Mac
 ```bash
-export AWS_ACCESS_KEY_ID="EXAMPLE"
-export AWS_SECRET_ACCESS_KEY="EXAMPLE"
+export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY_ID"
+export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_ACCESS_KEY"
 export AWS_DEFAULT_REGION="us-east-1"
 ```
-```powershell
-$Env:AWS_ACCESS_KEY_ID="EXAMPLE"
-$Env:AWS_SECRET_ACCESS_KEY="EXAMPLE"
-$Env:AWS_DEFAULT_REGION="us-east-1"
-```
 
-## Turn on Auto-Complete
-```bash
-export AWS_CLI_AUTO_PROMPT="on-partial"
+### Windows
+```powershell
+$Env:AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY_ID"
+$Env:AWS_SECRET_ACCESS_KEY="YOUR_SECRET_ACCESS_KEY"
+$Env:AWS_DEFAULT_REGION="us-east-1"
 ```
 
 ## Verify everything has been setup correctly
